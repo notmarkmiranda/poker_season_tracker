@@ -4,7 +4,11 @@ class ParticipantsController < ApplicationController
   end
 
   def show
-    @participant = Participant.find(params[:id])
+    if Participant.exists?(id: params[:id])
+      @participant = Participant.find(params[:id])
+    else
+      redirect_to error_404_path
+    end
   end
 
   def new
