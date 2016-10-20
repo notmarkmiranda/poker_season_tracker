@@ -12,6 +12,7 @@ gem 'jbuilder', '~> 2.5'
 
 group :development, :test do
   gem 'rspec-rails', '~> 3.5'
+  gem 'factory_girl_rails'
   gem 'pry'
 end
 
@@ -21,6 +22,9 @@ group :development do
 end
 
 group :test do
+  gem 'simplecov', :require => false
+  gem 'shoulda-matchers', '~> 3.1'
+  gem 'rails-controller-testing'
   gem 'database_cleaner'
   gem 'capybara'
 end
