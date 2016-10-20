@@ -28,6 +28,11 @@ RSpec.describe ParticipantsController, type: :controller do
       get :show, params: { id: @participant.id }
       expect(response).to render_template(:show)
     end
+
+    it "redirects to 404 on invalid game id" do
+      get :show, params: { id: (@participant.id + 1) }
+      expect(response).to redirect_to(error_404_path)
+    end
   end
 
   describe "GET new" do
@@ -146,7 +151,7 @@ RSpec.describe ParticipantsController, type: :controller do
     end
 
     it "removes @participant" do
-      expect{
+      expect {
         delete :destroy, params: { id: @participant.id }
       }.to change(Participant, :count).by(-1)
     end
