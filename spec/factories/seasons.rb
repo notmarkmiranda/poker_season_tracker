@@ -1,6 +1,5 @@
 FactoryGirl.define do
-  factory :season do
-    start "2016-10-20"
-    end "2016-10-20"
+  factory :season do |f|
+    f.active true
   end
 end

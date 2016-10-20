@@ -1,8 +1,7 @@
 class CreateSeasons < ActiveRecord::Migration[5.0]
   def change
     create_table :seasons do |t|
-      t.date :start
-      t.date :end
+      t.boolean :active, default: true
 
       t.timestamps
     end

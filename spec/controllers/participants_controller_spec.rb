@@ -48,7 +48,6 @@ RSpec.describe ParticipantsController, type: :controller do
     end
 
     context "with valid attributes" do
-
       it "creates a new participant" do
         expect {
           post :create, params: { participant: @attrs }
@@ -63,12 +62,12 @@ RSpec.describe ParticipantsController, type: :controller do
 
     context "with invalid attributes" do
       it "redirects to new template without first name" do
-        post :create, params: {participant: { last_name: "doe" }}
+        post :create, params: { participant: { last_name: "doe" }}
         expect(response).to render_template(:new)
       end
 
       it "redirects to new template without last name" do
-        post :create, params: {participant: { first_name: "john" }}
+        post :create, params: { participant: { first_name: "john" }}
         expect(response).to render_template(:new)
       end
     end
