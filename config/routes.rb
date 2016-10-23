@@ -1,4 +1,7 @@
 Rails.application.routes.draw do
+
+  root "pages#index"
+  
   resources :games
   resources :players, only: [:index, :show, :new, :create, :update]
   resources :participants
