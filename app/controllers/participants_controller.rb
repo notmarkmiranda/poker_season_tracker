@@ -1,6 +1,6 @@
 class ParticipantsController < ApplicationController
   def index
-    @participants = Participant.all
+    @participants = Participant.all.sort_by { |p| p.last_name }
   end
 
   def show

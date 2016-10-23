@@ -10,6 +10,10 @@ class Participant < ApplicationRecord
     last_name[0] + '.'
   end
 
+  def display_name
+    "#{first_name} #{last_initial}"
+  end
+
   def total_game_count
     games.count
   end
@@ -22,6 +26,13 @@ class Participant < ApplicationRecord
     (score * 100).floor / 100.0
   end
 
+  def actual_score
+    score = games.map do |game|
+      game.players.find_by(participant_id: id).score
+    end.reduce(:+)
+    (score * 100).floor / 100.0
+  end
+
   def average_score
     (total_score / total_game_count * 100).floor / 100.0
   end
@@ -30,7 +41,8 @@ class Participant < ApplicationRecord
     players.where(finishing_place: [1,2,3]).count
   end
 
-  def display_name
-    "#{first_name} #{last_initial}"
+  def percentage_attended
+    (total_game_count / Game.count.to_f * 100).floor / 1.0
   end
+
 end
