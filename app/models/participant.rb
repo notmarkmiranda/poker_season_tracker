@@ -15,8 +15,9 @@ class Participant < ApplicationRecord
   end
 
   def total_score
+    overall_game_count = Game.count
     score = games.map do |game|
-      game.players.find_by(participant_id: id).score
+      (total_game_count / overall_game_count.to_f) > 0.50 ? game.players.find_by(participant_id: id).score : 0
     end.reduce(:+)
     (score * 100).floor / 100.0
   end
@@ -27,5 +28,9 @@ class Participant < ApplicationRecord
 
   def game_top_three_count
     players.where(finishing_place: [1,2,3]).count
+  end
+
+  def display_name
+    "#{first_name} #{last_initial}"
   end
 end
