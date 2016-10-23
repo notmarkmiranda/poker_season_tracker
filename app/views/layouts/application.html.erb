@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>PokerSeasonTracker</title>
+    <title>p-p-p-pokerrank</title>
     <%= csrf_meta_tags %>
 
     <%= stylesheet_link_tag    'application', media: 'all' %>
@@ -9,6 +9,10 @@
   </head>
 
   <body>
-    <%= yield %>
+
+    <%= render partial: "shared/navbar" %>
+    <div class="main-container">
+      <%= yield %>
+  </div>
   </body>
 </html>

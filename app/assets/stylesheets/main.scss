@@ -1,0 +1,39 @@
+a.navbar-brand > span {
+  font-weight: bold;
+  color: #C89C00;
+}
+
+li.nav-item > a.nav-link {
+  text-transform: uppercase;
+  font-size: 0.7em;
+  padding-top: 10px;
+  padding-left: 20px;
+}
+
+.main-container {
+  margin-top: 70px;
+}
+
+.muted-text {
+  font-size: 0.7em;
+}
+div.list-group-item.list-group-item-action.players {
+  background-color: #86BBD8;
+  & > h5.list-group-item-heading {
+    color: #fff;
+  }
+}
+
+div.list-group-item.list-group-item-action.games {
+  background-color: #33658A;
+  & > h5.list-group-item-heading {
+    color: #fff;
+  }
+}
+
+div.list-group-item.list-group-item-action.seasons {
+  background-color: #88A0A8;
+  & > h5.list-group-item-heading {
+    color: #fff;
+  }
+}

@@ -36,9 +36,9 @@ ActiveRecord::Schema.define(version: 20161020211704) do
     t.integer  "participant_id"
     t.integer  "game_id"
     t.integer  "finishing_place"
-    t.datetime "created_at",      null: false
-    t.datetime "updated_at",      null: false
-    t.integer  "total_expense"
+    t.datetime "created_at",                     null: false
+    t.datetime "updated_at",                     null: false
+    t.integer  "additional_expense", default: 0
     t.index ["game_id"], name: "index_players_on_game_id", using: :btree
     t.index ["participant_id"], name: "index_players_on_participant_id", using: :btree
   end

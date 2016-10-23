@@ -10,4 +10,10 @@ RSpec.describe Game, type: :model do
     it { should validate_presence_of(:buy_in) }
     it { should validate_presence_of(:season_id) }
   end
+
+  it "#player_count" do
+    create_the_game
+    game = Game.last
+    expect(game.player_count).to eq(6)
+  end
 end
