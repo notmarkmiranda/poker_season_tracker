@@ -69,14 +69,14 @@ class Participant < ApplicationRecord
     (players.where(finishing_place: places).count / games_played.to_f * 100).floor / 1.0
   end
 
+  def evaluated_games
+    games.where(season_id: Season.current)
+  end
+
   private
 
   def current_games_count
     Game.where(season_id: Season.current).count
-  end
-
-  def evaluated_games
-    games.where(season_id: Season.current)
   end
 
   def calculate_competition_score

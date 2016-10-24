@@ -40,6 +40,13 @@ div.list-group-item.list-group-item-action.seasons {
   }
 }
 
+div.list-group-item.list-group-item-action.yellow {
+  background-color: #C89C00;
+  & > h5.list-group-item-heading {
+    color: #fff;
+  }
+}
+
 table {
   font-size: 0.9em;
 }
@@ -50,4 +57,8 @@ thead.bg-primary > tr > th, tbody > tr > td {
 
 tr {
   cursor: pointer;
+}
+
+p.list-group-item-text > span {
+  color: red;
 }

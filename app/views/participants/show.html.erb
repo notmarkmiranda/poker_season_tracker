@@ -8,18 +8,33 @@
         </div>
         <div class="list-group-item list-group-item-action">
           <h5 class="list-group-item-heading">CUMULATIVE STATS</h5>
-          <p class="list-group-item-text">Games played: <%= @participant.games_played %></p>
-          <p class="list-group-item-text">Attendance: <%= @participant.overall_attendance %>%</p>
-          <p class="list-group-item-text">Win: <%= @participant.overall_percentage([1]) %>%</p>
-          <p class="list-group-item-text">Place: <%= @participant.overall_percentage([1,2,3]) %>%</p>
+          <p class="list-group-item-text">Games played: <span><%= @participant.games_played %></span></p>
+          <p class="list-group-item-text">Attendance: <span><%= @participant.overall_attendance %>%</span></p>
+          <p class="list-group-item-text">Win: <span><%= @participant.overall_percentage([1]) %>%</span></p>
+          <p class="list-group-item-text">Place: <span><%= @participant.overall_percentage([1,2,3]) %>%</span></p>
         </div>
       </div>
     </div>
     <div class="col-md-8">
       <div class="list-group">
-        <div class="list-group-item list-group-item-action">
-          <%= "THIS!" %>
+        <div class="list-group-item list-group-item-action games">
+          <h5 class="list-group-item-heading">CURRENT SEASON STATISTICS</h5>
+          <p class="list-group-item-text">&nbsp;</p>
         </div>
+        <div class="list-group-item list-group-item-action">
+          <p class="list-group-item-text">Games played: <span><%= @participant.evaluated_games.count %></span></p>
+          <p class="list-group-item-text">Attendance: <span><%= @participant.percentage_attended %>%</span></p>
+          <p class="list-group-item-text">Win: <span><%= @participant.overall_percentage([1]) %>%</span></p>
+          <p class="list-group-item-text">Place: <span><%= @participant.overall_percentage([1,2,3]) %>%</span></p>
+        </div>
+        <% @participant.evaluated_games.each do |game| %>
+        <div class="list-group-item list-group-item-action">
+          <h5 class="list-group-item-heading"><%= game.full_formatted_date %></h5>
+          <p class="list-group-item-text"># of players: <%= game.player_count %></p>
+          <p class="list-group-item-text">Finishing place: <%= game.find_player(@participant.id).finishing_place %></p>
+          <p class="list-group-item-text">Head-to-head nemesis: <%= game.find_player(@participant.id).nemesis %></p>
+        </div>
+        <% end %>
       </div>
     </div>
   </div>

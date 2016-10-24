@@ -12,6 +12,16 @@ class Player < ApplicationRecord
     (score * 100).floor / 100.0
   end
 
+  def nemesis
+    if finishing_place == 1
+      game.players.find_by(finishing_place: 2).participant.display_name
+    elsif finishing_place == 2
+      game.players.find_by(finishing_place: 1).participant.display_name
+    else
+      "N/A"
+    end
+  end
+
   private
 
   def score_math
