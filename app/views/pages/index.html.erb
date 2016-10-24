@@ -5,21 +5,21 @@
       <div class="list-group">
         <div class="list-group-item list-group-item-action players">
           <h5 class="list-group-item-heading">Top 5 Players</h5>
-          <p class="list-group-item-text">By Overall Score</p>
+          <p class="list-group-item-text">By Evaluated Score</p>
         </div>
 
         <% @participants.each_with_index do |participant, index| %>
         <div class="list-group-item list-group-item-action">
           <h5 class="list-group-item-heading">
-            <%= "#{index + 1}. #{participant.first_name} #{participant.last_initial}" %>
+            <%= "#{index + 1}. #{participant.display_name}" %>
           </h5>
           <p class="list-group-item-text muted-text">
-            <%= pluralize(participant.total_score, 'point') %> |
-            <%= pluralize(participant.total_game_count, 'game') %> |
-            <%= "#{participant.average_score} average PPG" %>
+            <%= pluralize(participant.evaluated_score, 'point') %> |
+            <%= pluralize(participant.total_game_count, 'game') %>
+            <%# "#{participant.percentage_attended}% attendance" %>
           </p>
           <p class="list-group-item-text muted-text">
-            # of times placed: <%= participant.game_top_three_count %>
+            top three: <%= participant.game_top_three_count %>
           </p>
         </div>
         <% end %>
@@ -43,7 +43,7 @@
               Winner: <%= game.winner %>
             </p>
             <p class="list-group-item-text muted-text">
-              2nd Place: <%= game.second_place %>
+              Runner Up: <%= game.second_place %>
             </p>
           </div>
           <% end %>

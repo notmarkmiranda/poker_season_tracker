@@ -1,26 +1,31 @@
 <div class="container">
+  <!-- <div class="muted-text">
+    *evaluated points - score having attended at least 30% of the overall games<br />
+    *actual points - score over all available games
+  </div> -->
   <table class="table table-hover table-sm table-striped">
-    <thead class="thead-inverse">
+    <thead class="bg-primary">
       <tr>
+        <th>#</th>
         <th>Name</th>
-        <th>Games Attended</th>
-        <th>Games Placed</th>
+        <th>Attended</th>
+        <th>Placed</th>
         <th>Attendance %</th>
-        <th>Counted Score</th>
-        <th>Actual Score</th>
+        <th>Current Season Score</th>
       </tr>
     </thead>
     <tbody>
-  <% @participants.each do |p| %>
-  <tr>
-    <td><%= p.display_name %></td>
-    <td><%= p.total_game_count %></td>
-    <td><%= p.game_top_three_count %></td>
-    <td><%= p.percentage_attended %></td>
-    <td><%= p.total_score %></td>
-    <td><%= p.actual_score %></td>
-  </tr>
-  <% end %>
+      <% @participants.each_with_index do |p, i| %>
+      <tr data-link="<%= participant_path(p) %>">
+        <td><%= i + 1 %></td>
+        <td><%= p.display_name %></td>
+        <td><%= p.total_game_count %></td>
+        <td><%= p.game_top_three_count %></td>
+        <td><%= p.percentage_attended %></td>
+        <td><%= p.evaluated_score %></td>
+      </tr>
+      <% end %>
     </tbody>
   </table>
-  </div>
+
+</div>

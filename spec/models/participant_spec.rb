@@ -9,11 +9,6 @@ RSpec.describe Participant, type: :model do
     it { should validate_uniqueness_of(:first_name).scoped_to(:last_name).case_insensitive }
   end
 
-  it "#last_initial" do
-    part = create(:participant, last_name: "Miranda")
-    expect(part.last_initial).to eq("M.")
-  end
-
   it "#total_game_count" do
     player = create(:player)
     participant = player.participant
@@ -31,14 +26,14 @@ RSpec.describe Participant, type: :model do
     expect(participant.total_game_count).to eq(3)
   end
 
-  it "#total_score" do
+  it "#total_points" do
     create_the_game
     tyler = Participant.find_by(first_name: "Tyler")
     mark  = Participant.find_by(first_name: "Mark")
     scott = Participant.find_by(first_name: "Scott")
-    expect(tyler.total_score).to eq(4.74)
-    expect(mark.total_score).to eq(2.37)
-    expect(scott.total_score).to eq(1.35)
+    expect(tyler.total_points).to eq(4.74)
+    expect(mark.total_points).to eq(2.37)
+    expect(scott.total_points).to eq(1.35)
   end
 
   it "#average_score" do

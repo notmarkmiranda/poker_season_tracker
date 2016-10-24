@@ -1,0 +1,26 @@
+<div class="container">
+  <div class="row">
+    <div class="col-md-4">
+      <div class="list-group">
+        <div class="list-group-item list-group-item-action active">
+          <h5 class="list-group-item-heading"><%= @participant.full_name %></h5>
+          <p class="list-group-item-text">Player since <%= @participant.first_game %></p>
+        </div>
+        <div class="list-group-item list-group-item-action">
+          <h5 class="list-group-item-heading">CUMULATIVE STATS</h5>
+          <p class="list-group-item-text">Games played: <%= @participant.games_played %></p>
+          <p class="list-group-item-text">Attendance: <%= @participant.overall_attendance %>%</p>
+          <p class="list-group-item-text">Win: <%= @participant.overall_percentage([1]) %>%</p>
+          <p class="list-group-item-text">Place: <%= @participant.overall_percentage([1,2,3]) %>%</p>
+        </div>
+      </div>
+    </div>
+    <div class="col-md-8">
+      <div class="list-group">
+        <div class="list-group-item list-group-item-action">
+          <%= "THIS!" %>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

@@ -12,11 +12,13 @@ li.nav-item > a.nav-link {
 
 .main-container {
   margin-top: 70px;
+  margin-bottom: 70px;
 }
 
 .muted-text {
   font-size: 0.7em;
 }
+
 div.list-group-item.list-group-item-action.players {
   background-color: #86BBD8;
   & > h5.list-group-item-heading {
@@ -36,4 +38,16 @@ div.list-group-item.list-group-item-action.seasons {
   & > h5.list-group-item-heading {
     color: #fff;
   }
+}
+
+table {
+  font-size: 0.9em;
+}
+
+thead.bg-primary > tr > th, tbody > tr > td {
+  text-align: center;
+}
+
+tr {
+  cursor: pointer;
 }
