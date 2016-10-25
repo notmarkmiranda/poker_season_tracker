@@ -16,7 +16,7 @@
     </thead>
     <tbody>
       <% @participants.each_with_index do |p, i| %>
-      <tr data-link="<%= participant_path(p) %>">
+      <tr class="participant-row" data-link="<%= participant_path(p) %>">
         <td><%= i + 1 %></td>
         <td><%= p.display_name %></td>
         <td><%= p.total_game_count %></td>

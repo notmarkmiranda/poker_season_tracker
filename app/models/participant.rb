@@ -37,15 +37,8 @@ class Participant < ApplicationRecord
     (score * 100).floor / 100.0
   end
 
-  def actual_score
-    score = games.map do |game|
-      game.players.find_by(participant_id: id).score
-    end.reduce(:+)
-    (score * 100).floor / 100.0
-  end
-
   def average_score
-    (total_points / total_game_count * 100).floor / 100.0
+    (total_points / games_played * 100).floor / 100.0
   end
 
   def game_top_three_count
@@ -69,14 +62,24 @@ class Participant < ApplicationRecord
     (players.where(finishing_place: places).count / games_played.to_f * 100).floor / 1.0
   end
 
+  def evaluated_overall_percentage(places)
+    won   = players.where(finishing_place: places).where(game_id: current_games.pluck(:id)).count
+    total = total_game_count.to_f
+    (won / total * 100).floor / 1.0
+  end
+
   def evaluated_games
     games.where(season_id: Season.current)
   end
 
   private
 
+  def current_games
+    Game.where(season_id: Season.current)
+  end
+
   def current_games_count
-    Game.where(season_id: Season.current).count
+    current_games.count
   end
 
   def calculate_competition_score

@@ -14,9 +14,9 @@ class Player < ApplicationRecord
 
   def nemesis
     if finishing_place == 1
-      game.players.find_by(finishing_place: 2).participant.display_name
+      game.second_place
     elsif finishing_place == 2
-      game.players.find_by(finishing_place: 1).participant.display_name
+      game.winner
     else
       "N/A"
     end

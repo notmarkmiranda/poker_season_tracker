@@ -17,6 +17,7 @@ li.nav-item > a.nav-link {
 
 .muted-text {
   font-size: 0.7em;
+  text-transform: uppercase;
 }
 
 div.list-group-item.list-group-item-action.players {
@@ -55,7 +56,7 @@ thead.bg-primary > tr > th, tbody > tr > td {
   text-align: center;
 }
 
-tr {
+.participant-row, .game-row {
   cursor: pointer;
 }
 

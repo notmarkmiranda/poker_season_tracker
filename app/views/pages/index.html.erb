@@ -9,14 +9,13 @@
         </div>
 
         <% @participants.each_with_index do |participant, index| %>
-        <div class="list-group-item list-group-item-action">
+        <div class="list-group-item list-group-item-action participant-row" data-link="<%= participant_path(participant) %>">
           <h5 class="list-group-item-heading">
             <%= "#{index + 1}. #{participant.display_name}" %>
           </h5>
           <p class="list-group-item-text muted-text">
             <%= pluralize(participant.evaluated_score, 'point') %> |
             <%= pluralize(participant.total_game_count, 'game') %>
-            <%# "#{participant.percentage_attended}% attendance" %>
           </p>
           <p class="list-group-item-text muted-text">
             top three: <%= participant.game_top_three_count %>
@@ -24,6 +23,9 @@
         </div>
         <% end %>
 
+        <div class="list-group-item list-group-item-action">
+          <p class="list-group-item-text muted-text"><%= link_to "View all players", participants_path  %></p>
+        </div>
       </div>
     </div>
 
