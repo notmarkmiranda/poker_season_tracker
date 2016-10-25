@@ -1,5 +1,5 @@
 function participantRow() {
-  $("tr[data-link]").click(function() {
+  $("tr[data-link]").on('click', function() {
     window.location = $(this).attr('data-link');
   })
 }
