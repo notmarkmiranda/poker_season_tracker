@@ -6,6 +6,7 @@ class GamesController < ApplicationController
   def show
     if Game.exists?(params[:id])
       @game = Game.find(params[:id])
+      @players = @game.players.sort_by { |p| p.finishing_place }
     else
       redirect_to error_404_path
     end

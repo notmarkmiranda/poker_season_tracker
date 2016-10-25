@@ -1,0 +1,24 @@
+<div class="container">
+  <div class="row">
+    <div class="col-md-6 offset-md-3">
+      <div class="list-group">
+        <div class="list-group-item list-group-item-action yellow">
+          <h5 class="list-group-item-heading">Game #<%= @game.id %></h5>
+          <p class="list-group-item-text">Date: <%= @game.full_formatted_date %></p>
+          <p class="list-group-item-text">Season #<%= @game.season.id %></p>
+        </div>
+        <div class="list-group-item list-group-item-action">
+          <h5 class="list-group-item-heading">STATS</h5>
+          <p class="list-group-item-text">Players: <span><%= @game.player_count %></span></p>
+          <p class="list-group-item-text">Buy-In: <span><%= number_to_currency(@game.buy_in) %></span></p>
+        </div>
+        <% @players.each do |player| %>
+          <div class="list-group-item list-group-item-action">
+            <h5 class="list-group-item-heading"><%= "#{player.finishing_place}. #{player.participant.display_name}" %></h5>
+            <p class="list-group-item-text">Score: <span><%= player.score %></span></p>
+          </div>
+        <% end %>
+      </div>
+    </div>
+  </div>
+</div>

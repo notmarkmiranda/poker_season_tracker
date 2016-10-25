@@ -15,13 +15,21 @@ class Game < ApplicationRecord
     date.strftime("%b %d, %Y")
   end
 
+  def full_formatted_date
+    date.strftime("%B %d, %Y")
+  end
+
   def winner
     winner = Participant.joins(:players).where('players.game_id = ?', id).where('players.finishing_place = ?', 1).first
-    "#{winner.first_name} #{winner.last_initial}"
+    "#{winner.display_name}"
   end
 
   def second_place
     second = Participant.joins(:players).where('players.game_id = ?', id).where('players.finishing_place = ?', 2).first
-    "#{second.first_name} #{second.last_initial}"
+    "#{second.display_name}"
+  end
+
+  def find_player(id)
+    players.find_by(participant_id: id)
   end
 end

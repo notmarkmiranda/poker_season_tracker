@@ -28,6 +28,9 @@ class Season < ApplicationRecord
     parse_standings(standings)
   end
 
+  def self.current
+    Season.find_by(active: true).id
+  end
 
   private
 
