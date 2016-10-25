@@ -1,4 +1,4 @@
 $(document).ready(function() {
-  gameRow()
-  participantRow()
-})
+  gameRow();
+  participantRow();
+});
