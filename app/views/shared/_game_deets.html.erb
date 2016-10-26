@@ -1,0 +1,7 @@
+<div class="list-group-item list-group-item-action div-row" data-link="<%= game_path(game) %>">
+  <h5 class="list-group-item-heading"><%= game.full_formatted_date %></h5>
+  <p class="list-group-item-text"># of players: <span><%= game.player_count %></span></p>
+  <p class="list-group-item-text">Winner: <span><%= game.winner %></span></p>
+  <p class="list-group-item-text">Runner Up: <span><%= game.second_place %></span></p>
+  <p class="list-group-item-text">Pot size: <span><%= number_to_currency(game.pot_size) %></span></p>
+</div>

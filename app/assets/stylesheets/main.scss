@@ -52,7 +52,7 @@ table {
   font-size: 0.9em;
 }
 
-thead.bg-primary > tr > th, tbody > tr > td {
+thead > tr > th, tbody > tr > td {
   text-align: center;
 }
 
@@ -66,4 +66,8 @@ p.list-group-item-text > span {
 
 div.participant-main {
   padding-bottom: 20px;
+}
+
+div.list-group-item.list-group-item-action.stat-line {
+  background-color: #e7e7e7;
 }

@@ -1,6 +1,6 @@
 class SeasonsController < ApplicationController
   def index
-    @seasons = Season.all
+    @seasons = Season.all.sort_by { |season| season.beginning_of_season }.reverse
   end
 
   def show

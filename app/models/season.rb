@@ -32,6 +32,16 @@ class Season < ApplicationRecord
     Season.find_by(active: true).id
   end
 
+  def player_count
+    participants.uniq.count
+  end
+
+  def cumulative_pot_size
+    games.map do |g|
+      g.pot_size
+    end.reduce(:+)
+  end
+
   private
 
   def parse_standings(standings)

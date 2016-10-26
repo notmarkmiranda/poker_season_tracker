@@ -3,7 +3,7 @@
     <h5 class="list-group-item-heading"><%= participant.full_name %></h5>
     <p class="list-group-item-text">Player since <%= participant.first_game %></p>
   </div>
-  <div class="list-group-item list-group-item-action">
+  <div class="list-group-item list-group-item-action stat-line">
     <h5 class="list-group-item-heading">CUMULATIVE STATS</h5>
     <p class="list-group-item-text">Games played: <span><%= participant.total_games_count %></span></p>
     <p class="list-group-item-text">Attendance: <span><%= participant.overall_attendance %>%</span></p>
