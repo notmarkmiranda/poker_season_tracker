@@ -1,0 +1,14 @@
+<div class="list-group">
+  <div class="list-group-item list-group-item-action yellow">
+    <h5 class="list-group-item-heading"><%= participant.full_name %></h5>
+    <p class="list-group-item-text">Player since <%= participant.first_game %></p>
+  </div>
+  <div class="list-group-item list-group-item-action">
+    <h5 class="list-group-item-heading">CUMULATIVE STATS</h5>
+    <p class="list-group-item-text">Games played: <span><%= participant.total_games_count %></span></p>
+    <p class="list-group-item-text">Attendance: <span><%= participant.overall_attendance %>%</span></p>
+    <p class="list-group-item-text">Win: <span><%= participant.overall_percentage([1]) %>%</span></p>
+    <p class="list-group-item-text">Place: <span><%= participant.overall_percentage([1,2,3]) %>%</span></p>
+    <p class="list-group-item-text">Cumulative Score: <span><%= participant.average_score %></span></p>
+  </div>
+</div>

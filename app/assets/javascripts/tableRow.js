@@ -1,4 +1,4 @@
-function participantRow() {
+function tableRow() {
   $("tr[data-link]").on('click', function() {
     window.location = $(this).attr('data-link');
   });

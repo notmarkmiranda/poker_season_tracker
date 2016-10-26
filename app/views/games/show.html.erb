@@ -11,9 +11,10 @@
           <h5 class="list-group-item-heading">STATS</h5>
           <p class="list-group-item-text">Players: <span><%= @game.player_count %></span></p>
           <p class="list-group-item-text">Buy-In: <span><%= number_to_currency(@game.buy_in) %></span></p>
+          <p class="list-group-item-text">Pot Size: <span><%= number_to_currency(@game.pot_size) %></span></p>
         </div>
         <% @players.each do |player| %>
-          <div class="list-group-item list-group-item-action">
+          <div class="list-group-item list-group-item-action table-row" data-link="<%= participant_path(player.participant) %>">
             <h5 class="list-group-item-heading"><%= "#{player.finishing_place}. #{player.participant.display_name}" %></h5>
             <p class="list-group-item-text">Score: <span><%= player.score %></span></p>
           </div>

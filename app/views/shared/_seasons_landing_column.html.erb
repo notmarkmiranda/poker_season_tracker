@@ -1,0 +1,21 @@
+<div class="col-md-4">
+  <div class="list-group">
+    <div class="list-group-item list-group-item-action seasons">
+      <h5 class="list-group-item-heading">Most Recent Seasons</h5>
+      <p class="list-group-item-text">&nbsp;</p>
+    </div>
+      <% seasons.each_with_index do |season, index| %>
+      <div class="list-group-item list-group-item-action">
+        <h5 class="list-group-item-heading">
+          <%= "Ended: #{season.end_of_season}" %>
+        </h5>
+        <p class="list-group-item-text muted-text">
+          # of Games: <%= season.game_count %>
+        </p>
+        <p class="list-group-item-text muted-text">
+          Season Leader: <%= season.winner %>
+        </p>
+      </div>
+      <% end %>
+  </div>
+</div>

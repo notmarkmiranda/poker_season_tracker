@@ -32,4 +32,12 @@ class Game < ApplicationRecord
   def find_player(id)
     players.find_by(participant_id: id)
   end
+
+  def pot_size
+    player_count * buy_in + total_additional_expense
+  end
+
+  def total_additional_expense
+    players.pluck(:additional_expense).reduce(:+)
+  end
 end

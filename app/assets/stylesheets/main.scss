@@ -56,10 +56,14 @@ thead.bg-primary > tr > th, tbody > tr > td {
   text-align: center;
 }
 
-.participant-row, .game-row {
+.table-row, .div-row {
   cursor: pointer;
 }
 
 p.list-group-item-text > span {
   color: red;
+}
+
+div.participant-main {
+  padding-bottom: 20px;
 }

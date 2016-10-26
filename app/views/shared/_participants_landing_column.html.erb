@@ -1,0 +1,25 @@
+<div class="col-md-4">
+  <div class="list-group">
+    <div class="list-group-item list-group-item-action players">
+      <h5 class="list-group-item-heading">Top 5 Players</h5>
+      <p class="list-group-item-text">By Evaluated Score</p>
+    </div>
+    <% participants.each_with_index do |participant, index| %>
+    <div class="list-group-item list-group-item-action table-row" data-link="<%= participant_path(participant) %>">
+      <h5 class="list-group-item-heading">
+        <%= "#{index + 1}. #{participant.display_name}" %>
+      </h5>
+      <p class="list-group-item-text muted-text">
+        <%= pluralize(participant.evaluated_score, 'point') %> |
+        <%= pluralize(participant.evaluated_game_count, 'game') %>
+      </p>
+      <p class="list-group-item-text muted-text">
+        top three: <%= participant.game_top_three_count %>
+      </p>
+    </div>
+    <% end %>
+    <div class="list-group-item list-group-item-action">
+      <p class="list-group-item-text muted-text"><%= link_to "View all players", participants_path  %></p>
+    </div>
+  </div>
+</div>

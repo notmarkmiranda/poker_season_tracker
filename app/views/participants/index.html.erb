@@ -1,8 +1,4 @@
 <div class="container">
-  <!-- <div class="muted-text">
-    *evaluated points - score having attended at least 30% of the overall games<br />
-    *actual points - score over all available games
-  </div> -->
   <table class="table table-hover table-sm table-striped">
     <thead class="bg-primary">
       <tr>
@@ -16,16 +12,15 @@
     </thead>
     <tbody>
       <% @participants.each_with_index do |p, i| %>
-      <tr class="participant-row" data-link="<%= participant_path(p) %>">
+      <tr class="table-row" data-link="<%= participant_path(p) %>">
         <td><%= i + 1 %></td>
         <td><%= p.display_name %></td>
-        <td><%= p.total_game_count %></td>
+        <td><%= p.evaluated_game_count %></td>
         <td><%= p.game_top_three_count %></td>
-        <td><%= p.percentage_attended %></td>
+        <td><%= p.current_percentage_attended %></td>
         <td><%= p.evaluated_score %></td>
       </tr>
       <% end %>
     </tbody>
   </table>
-
 </div>

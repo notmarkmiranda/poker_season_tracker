@@ -1,0 +1,22 @@
+<div class="list-group">
+  <div class="list-group-item list-group-item-action seasons">
+    <h5 class="list-group-item-heading">PREVIOUS SEASON STATISTICS</h5>
+    <p class="list-group-item-text">&nbsp;</p>
+  </div>
+  <div class="list-group-item list-group-item-action">
+    <p class="list-group-item-text">Games played: <span><%= participant.previous_game_count %></span></p>
+    <p class="list-group-item-text">Attendance: <span><%= participant.previous_percentage_attended %>%</span></p>
+    <p class="list-group-item-text">Win: <span><%= participant.previous_overall_percentage([1]) %>%</span></p>
+    <p class="list-group-item-text">Place: <span><%= participant.previous_overall_percentage([1,2,3]) %>%</span></p>
+    <p class="list-group-item-text">Evaluated Score: <span><%= participant.previous_score %></span></p>
+  </div>
+  <% participant.previous_evaluated_games.each do |game| %>
+  <div class="list-group-item list-group-item-action div-row" data-link="<%= game_path(game) %>">
+    <h5 class="list-group-item-heading"><%= game.full_formatted_date %></h5>
+    <p class="list-group-item-text"># of players: <span><%= game.player_count %></span></p>
+    <p class="list-group-item-text">Finishing place: <span><%= game.find_player(participant.id).finishing_place %></span></p>
+    <p class="list-group-item-text">Game score: <span><%= game.find_player(participant.id).score %></span></p>
+    <p class="list-group-item-text">Head-to-head nemesis: <span><%= game.find_player(participant.id).nemesis %></span></p>
+  </div>
+  <% end %>
+</div>

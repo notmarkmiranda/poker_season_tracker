@@ -14,17 +14,29 @@ class Participant < ApplicationRecord
     "#{first_name} #{last_name}"
   end
 
-  def games_played
+  def total_games_count
     games.count
   end
 
-  def total_game_count
+  def evaluated_game_count
     evaluated_games.count
+  end
+
+  def previous_game_count
+    total_games_count - evaluated_game_count
   end
 
   def evaluated_score
     if attendance_validation
-      calculate_competition_score
+      calculate_competition_score("evaluated_games")
+    else
+      0.0
+    end
+  end
+
+  def previous_score
+    if attendance_validation
+      calculate_competition_score("previous_evaluated_games")
     else
       0.0
     end
@@ -38,7 +50,7 @@ class Participant < ApplicationRecord
   end
 
   def average_score
-    (total_points / games_played * 100).floor / 100.0
+    (total_points / total_games_count * 100).floor / 100.0
   end
 
   def game_top_three_count
@@ -49,8 +61,12 @@ class Participant < ApplicationRecord
     (games.count / Game.count.to_f * 100).floor / 1.0
   end
 
-  def percentage_attended
-    (total_game_count / current_games_count * 100).floor / 1.0
+  def current_percentage_attended
+    (evaluated_game_count / current_games_count * 100).floor / 1.0
+  end
+
+  def previous_percentage_attended
+    (previous_game_count / previous_games_count.to_f * 100).floor / 1.0
   end
 
   def first_game
@@ -59,17 +75,27 @@ class Participant < ApplicationRecord
   end
 
   def overall_percentage(places)
-    (players.where(finishing_place: places).count / games_played.to_f * 100).floor / 1.0
+    (players.where(finishing_place: places).count / total_games_count.to_f * 100).floor / 1.0
   end
 
   def evaluated_overall_percentage(places)
     won   = players.where(finishing_place: places).where(game_id: current_games.pluck(:id)).count
-    total = total_game_count.to_f
-    (won / total * 100).floor / 1.0
+    total = evaluated_game_count.to_f
+    total == 0.0 ? 0.0 : (won / total * 1000).floor / 10.0
+  end
+
+  def previous_overall_percentage(places)
+    won   = players.where(finishing_place: places).where(game_id: previous_games.pluck(:id)).count
+    total = previous_game_count.to_f
+    total == 0.0 ? 0.0 : (won / total * 1000).floor / 10.0
   end
 
   def evaluated_games
-    games.where(season_id: Season.current)
+    games.where(season_id: Season.current).sort_by { |game| game.date }.reverse
+  end
+
+  def previous_evaluated_games
+    games.where.not(season_id: Season.current).sort_by { |game| game.date }.reverse
   end
 
   private
@@ -82,8 +108,16 @@ class Participant < ApplicationRecord
     current_games.count
   end
 
-  def calculate_competition_score
-    top_5 = evaluated_games.map do |game|
+  def previous_games
+    Game.where.not(season_id: Season.current)
+  end
+
+  def previous_games_count
+    previous_games.count
+  end
+
+  def calculate_competition_score(games)
+    top_5 = self.send(games).map do |game|
       game.players.find_by(participant_id: id).score
     end
     skim(top_5)
@@ -91,7 +125,7 @@ class Participant < ApplicationRecord
 
   def skim(arr)
     best = arr.sort.last(5)
-    (best.reduce(:+) / best.count.to_f * 100).floor / 100.0
+    (best.reduce(:+) / best.count.to_f * 1000).floor / 1000.0
   end
 
   def attendance_validation

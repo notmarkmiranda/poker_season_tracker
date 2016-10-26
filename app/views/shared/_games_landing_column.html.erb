@@ -1,0 +1,24 @@
+<div class="col-md-4">
+  <div class="list-group">
+    <div class="list-group-item list-group-item-action games">
+      <h5 class="list-group-item-heading">Last 5 Games</h5>
+      <p class="list-group-item-text">&nbsp;</p>
+    </div>
+      <% games.each do |game| %>
+      <div class="list-group-item list-group-item-action div-row" data-link="<%= game_path(game) %>">
+        <h5 class="list-group-item-heading">
+          <%= "#{game.formatted_date} | #{game.player_count} Players " %>
+        </h5>
+        <p class="list-group-item-text muted-text">
+          Winner: <%= game.winner %>
+        </p>
+        <p class="list-group-item-text muted-text">
+          Runner Up: <%= game.second_place %>
+        </p>
+      </div>
+      <% end %>
+      <div class="list-group-item list-group-item-action">
+        <p class="list-group-item-text muted-text"><%= link_to "View all games", games_path  %></p>
+      </div>
+  </div>
+</div>
