@@ -5,7 +5,7 @@
       <p class="list-group-item-text">&nbsp;</p>
     </div>
       <% seasons.each_with_index do |season, index| %>
-      <div class="list-group-item list-group-item-action">
+      <div class="list-group-item list-group-item-action div-row" data-link="<%= season_path(season) %>">
         <h5 class="list-group-item-heading">
           <%= "Ended: #{season.end_of_season}" %>
         </h5>
