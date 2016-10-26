@@ -81,5 +81,5 @@ test:
 production:
   <<: *default
   database: poker_season_tracker_production
-  username: poker_season_tracker
-  password: <%= ENV['POKER_SEASON_TRACKER_DATABASE_PASSWORD'] %>
+  # username: poker_season_tracker
+  # password: <%= ENV['POKER_SEASON_TRACKER_DATABASE_PASSWORD'] %>

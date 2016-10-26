@@ -10,7 +10,8 @@ gem 'uglifier', '>= 1.3.0'
 gem 'coffee-rails', '~> 4.2'
 gem 'jquery-rails'
 gem 'jbuilder', '~> 2.5'
-gem "binding_of_caller"
+gem 'binding_of_caller'
+gem 'rails_12factor'
 
 group :development, :test do
   gem 'rspec-rails', '~> 3.5'
@@ -21,6 +22,7 @@ end
 group :development do
   gem 'web-console'
   gem 'listen', '~> 3.0.5'
+  gem 'better_errors'
 end
 
 group :test do
@@ -29,10 +31,6 @@ group :test do
   gem 'rails-controller-testing'
   gem 'database_cleaner'
   gem 'capybara'
-end
-
-group :development do
-  gem "better_errors"
 end
 
 gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]
