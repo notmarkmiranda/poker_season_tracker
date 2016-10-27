@@ -16,7 +16,7 @@ A Ruby on Rails, PostgreSQL, jQuery, and rspec tested app that tracks poker game
 ### WHY:
 I play in a monthly tournament-style poker game where we kept statistics on time played per round and top 3 finishers on sheets of paper. The question has been raised several times asking who the best player was. We were all at decent skill levels, but never had an answer to the question. I thought we could compile data and assign points based on tournament size, profitability, buy-in amount and total pot size.
 
-## HOW:
+### HOW:
 This is the database schema:
 
 ![poker_schema.png](https://d17oy1vhnax1f7.cloudfront.net/items/0X1y0a2Z2l0P2C0J1q34/poker_schema_v2.png?v=1a0b642e)

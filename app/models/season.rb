@@ -7,6 +7,10 @@ class Season < ApplicationRecord
     games.min_by { |game| game.date }.date.strftime("%b %d, %Y")
   end
 
+  def ended?
+    end_of_season == "Current Season"
+  end
+
   def end_of_season
     if !active
       games.max_by { |game| game.date }.date.strftime("%b %d, %Y")
