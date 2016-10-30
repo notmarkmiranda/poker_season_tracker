@@ -12,6 +12,7 @@ gem 'jquery-rails'
 gem 'jbuilder', '~> 2.5'
 gem 'binding_of_caller'
 gem 'rails_12factor'
+gem 'responders', '~>2.0'
 
 group :development, :test do
   gem 'rspec-rails', '~> 3.5'
