@@ -22,5 +22,9 @@ module PokerSeasonTracker
     # Application configuration should go into files in config/initializers
     # -- all .rb files in that directory are automatically loaded.
     config.active_record.time_zone_aware_types = [:datetime]
+    config.action_dispatch.default_headers = {
+      'Access-Control-Allow-Origin' => 'http://localhost:3000',
+      'Access-Control-Request-Method' => %w{GET}.join(",")
+    }
   end
 end
