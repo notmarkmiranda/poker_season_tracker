@@ -19,7 +19,7 @@ class GamesController < ApplicationController
   def create
     game = Game.new(game_params)
     if game.save
-      redirect_to game
+      redirect_to edit_game_path(game.id)
     else
       render :new
     end

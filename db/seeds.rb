@@ -20,10 +20,61 @@ roman        = Participant.create(first_name: "Roman", last_name: "Gavrilov")
 shawn        = Participant.create(first_name: "Shawn", last_name: "Lyndon")
 bobby        = Participant.create(first_name: "Bobby", last_name: "Yang")
 zach         = Participant.create(first_name: "Zach", last_name: "Moore")
+jeremy       = Participant.create(first_name: "Jeremy", last_name: "Balu")
+julius       = Participant.create(first_name: "Julius", last_name: "Bogdan")
+
+
+# START OF NOVEMBER 15 GAME
+game_111516 = Game.create(date: Date.new(2016, 11, 15),
+  buy_in: 15,
+  completed: true,
+  time_played: "03:30:00",
+  season_id: season.id)
+# andy
+game_111516.players.create(
+  participant_id: andy.id,
+  finishing_place: 1)
+# jeremy
+game_111516.players.create(
+  participant_id: jeremy.id,
+  finishing_place: 2)
+# john_m
+game_111516.players.create(
+  participant_id: john_m.id,
+  finishing_place: 3)
+# mike
+game_111516.players.create(
+  participant_id: mike.id,
+  finishing_place: 4,
+  additional_expense: 15)
+# mark_h
+game_111516.players.create(
+  participant_id: mark_h.id,
+  finishing_place: 5)
+# mark_m
+game_111516.players.create(
+  participant_id: mark_m.id,
+  finishing_place: 6)
+# tyler
+game_111516.players.create(
+  participant_id: tyler.id,
+  finishing_place: 7)
+# julius
+game_111516.players.create(
+  participant_id: julius.id,
+  finishing_place: 8)
+# scott
+game_111516.players.create(
+  participant_id: scott.id,
+  finishing_place: 9)
+
+# END OF NOVEMBER 15 GAME
+
 
 # START OF NOVEMBER 5 GAME - 3 - mike shawn
 game_110515 = Game.create(date: Date.new(2015, 11, 5),
   buy_in: 15,
+  completed: true,
   time_played: "03:30:00",
   season_id: preseason.id)
 # mike
@@ -56,6 +107,7 @@ Player.create(participant_id: zach.id,
 # START OF DECEMBER 7 GAME - 2 - mark tyler andy
 game_120715 = Game.create(date: Date.new(2015, 12, 7),
   buy_in: 15,
+  completed: true,
   time_played: "03:30:00",
   season_id: preseason.id)
 # mark_m
@@ -96,6 +148,7 @@ Player.create(participant_id: zach.id,
 # START OF JANUARY 5 GAME - 1 - andy mark chris
 game_010516 = Game.create(date: Date.new(2016, 1, 5),
   buy_in: 15,
+  completed: true,
   time_played: "03:30:00",
   season_id: preseason.id)
 # andy
@@ -132,6 +185,7 @@ Player.create(participant_id: tyler.id,
 # START OF FEBRUARY 15 GAME - 7 - shawn mark zach
 game_021516 = Game.create(date: Date.new(2016, 2, 15),
   buy_in: 15,
+  completed: true,
   time_played: "03:30:00",
   season_id: preseason.id)
 # shawn
@@ -164,6 +218,7 @@ Player.create(participant_id: mike.id,
 # START OF MARCH 15 GAME - 6 - mike shaw andy
 game_031516 = Game.create(date: Date.new(2016, 3, 15),
   buy_in: 15,
+  completed: true,
   time_played: "03:30:00",
   season_id: preseason.id)
 # mike
@@ -200,6 +255,7 @@ Player.create(participant_id: tyler.id,
 # START OF APRIL 5 GAME - 5 - andy john shawn
 game_040516 = Game.create(date: Date.new(2016, 4, 5),
   buy_in: 15,
+  completed: true,
   time_played: "03:30:00",
   season_id: preseason.id)
 # andy
@@ -236,6 +292,7 @@ Player.create(participant_id: bobby.id,
 # START OF MAY 11 GAME - 4 - chris eric mike g
 game_051116 = Game.create(date: Date.new(2016, 5, 11),
   buy_in: 15,
+  completed: true,
   time_played: "03:30:00",
   season_id: preseason.id)
 # chris
@@ -276,6 +333,7 @@ Player.create(participant_id: tyler.id,
 # START OF JUNE 13 GAME - 3 - tyler mike chris
 game_061316 = Game.create(date: Date.new(2016, 6, 13),
   buy_in: 15,
+  completed: true,
   time_played: "03:30:00",
   season_id: preseason.id)
 # tyler
@@ -316,6 +374,7 @@ Player.create(participant_id: roman.id,
 # START OF JULY 13 GAME - 2
 game_071316 = Game.create(date: Date.new(2016, 7, 13),
   buy_in: 15,
+  completed: true,
   time_played: "03:30:00",
   season_id: preseason.id)
 # mike
@@ -347,6 +406,7 @@ Player.create(participant_id: john_m.id,
 # START OF AUGUST 16TH GAME
 game_081616 = Game.create(date: Date.new(2016, 8, 16),
   buy_in: 15,
+  completed: true,
   time_played: "03:30:00",
   season_id: preseason.id)
 # chris
@@ -382,6 +442,7 @@ Player.create(participant_id: scott.id,
 # START OF SEPTEMBER 21ST GAME
 game_092116 = Game.create(date: Date.new(2016, 9, 21),
   buy_in: 15,
+  completed: true,
   time_played: "03:30:00",
   season_id: preseason.id)
 # mike
@@ -418,8 +479,9 @@ Player.create(participant_id: john_m.id,
 # START OF OCTOBER 18th GAME
 game = Game.create(date: Date.new(2016, 10, 18),
   buy_in: 15,
+  completed: true,
   time_played: "03:30:00",
-  season_id: season.id)
+  season_id: preseason.id)
 # tyler
 Player.create(participant_id: tyler.id,
   game_id: game.id,
@@ -445,3 +507,6 @@ Player.create(participant_id: scott.id,
   game_id: game.id,
   finishing_place: 6)
 # END OF OCTOBER 18th GAME
+
+# User
+User.create(email: 'markmiranda51@gmail.com', password: 'password')

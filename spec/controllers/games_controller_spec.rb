@@ -62,7 +62,7 @@ RSpec.describe GamesController, type: :controller do
 
       it "redirects to the game" do
         post :create, params: { game: @attrs }
-        expect(response).to redirect_to(Game.last)
+        expect(response).to redirect_to(edit_game_path(Game.last))
       end
     end
 

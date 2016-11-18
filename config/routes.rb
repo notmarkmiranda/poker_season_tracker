@@ -14,5 +14,9 @@ Rails.application.routes.draw do
     end
   end
 
+  get  '/login',  to: 'sessions#new', as: 'login'
+  post '/login',  to: 'sessions#create'
+  get  '/logout', to: 'sessions#destroy', as: 'logout'
+
   get '/error/404', to: "errors#show", as: "error_404"
 end

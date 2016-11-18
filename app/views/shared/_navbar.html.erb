@@ -2,6 +2,15 @@
   <div class="container">
     <a class="navbar-brand" href="/"><span>POKER</span>RANK</a>
     <ul class="nav navbar-nav pull-xs-right">
+      <% if current_user %>
+        <li class="nav-item">
+          <%= link_to "Create New Game", new_game_path, class:"nav-link" %>
+        </li>
+      <% else %>
+        <li class="nav-item">
+          <%= link_to "Log In", login_path, class:"nav-link" %>
+        </li>
+      <% end %>
       <li class="nav-item">
         <%= link_to "Players", participants_path, class:"nav-link" %>
       </li>
@@ -11,6 +20,11 @@
       <li class="nav-item">
         <%= link_to "Seasons", seasons_path, class:"nav-link" %>
       </li>
+      <% if current_user %>
+      <li class="nav-item">
+        <%= link_to "Log Out", logout_path, class:"nav-link" %>
+      </li>
+      <% end %>
     </li>
   </ul>
 </div>

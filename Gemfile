@@ -11,8 +11,12 @@ gem 'coffee-rails', '~> 4.2'
 gem 'jquery-rails'
 gem 'jbuilder', '~> 2.5'
 gem 'binding_of_caller'
-gem 'rails_12factor'
 gem 'responders', '~>2.0'
+gem 'bcrypt'
+
+group  :production do
+  gem 'rails_12factor'
+end
 
 group :development, :test do
   gem 'rspec-rails', '~> 3.5'
@@ -32,6 +36,7 @@ group :test do
   gem 'rails-controller-testing'
   gem 'database_cleaner'
   gem 'capybara'
+  gem 'launchy'
 end
 
 gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]
