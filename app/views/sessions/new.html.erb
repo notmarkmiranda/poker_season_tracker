@@ -1,0 +1,26 @@
+<div class="container">
+  <div class="row">
+    <div class="col-md-4 offset-md-4">
+      <div class="list-group">
+        <div class="list-group-item list-group-item-action active">
+          <h5 class="list-group-item-heading">Login!</h5>
+        </div>
+        <div class="list-group-item div-row">
+          <%= form_for :session, url: login_path do |f| %>
+            <div class="form-group">
+              <%= f.label :email, "E-Mail Address:", class: "muted-text" %>
+              <%= f.text_field :email, class: "form-control" %>
+            </div>
+            <div class="form-group">
+              <%= f.label :password, "Password:", class: "muted-text" %>
+              <%= f.password_field :password, class: "form-control" %>
+            </div>
+            <div class="form-group">
+              <%= f.submit "Let's Go!", class:"btn btn-primary btn-block" %>
+            </div>
+          <% end %>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

@@ -9,12 +9,14 @@
         <h5 class="list-group-item-heading">
           <%= "#{game.formatted_date} | #{game.player_count} Players " %>
         </h5>
-        <p class="list-group-item-text muted-text">
-          Winner: <%= game.winner %>
-        </p>
-        <p class="list-group-item-text muted-text">
-          Runner Up: <%= game.second_place %>
-        </p>
+        <% if game.completed %>
+          <p class="list-group-item-text muted-text">
+            Winner: <%= game.winner %>
+          </p>
+          <p class="list-group-item-text muted-text">
+            Runner Up: <%= game.second_place %>
+          </p>
+        <% end %>
       </div>
       <% end %>
       <div class="list-group-item list-group-item-action">

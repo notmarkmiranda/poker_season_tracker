@@ -40,4 +40,8 @@ class Game < ApplicationRecord
   def total_additional_expense
     players.pluck(:additional_expense).reduce(:+)
   end
+
+  def number_of_players
+    
+  end
 end
