@@ -34,9 +34,11 @@ RSpec.describe Participant, type: :model do
 
   it "#total_points" do
     create_the_game
+    Game.last.calculate_scores
     tyler = Participant.find_by(first_name: "Tyler")
     mark  = Participant.find_by(first_name: "Mark")
     scott = Participant.find_by(first_name: "Scott")
+
     expect(tyler.total_points).to eq(4.74)
     expect(mark.total_points).to eq(2.37)
     expect(scott.total_points).to eq(1.35)
@@ -44,6 +46,7 @@ RSpec.describe Participant, type: :model do
 
   it "#average_score" do
     create_the_game
+    Game.last.calculate_scores
     tyler = Participant.find_by(first_name: "Tyler")
     expect(tyler.average_score).to eq(4.74)
   end

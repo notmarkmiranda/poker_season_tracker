@@ -1,6 +1,10 @@
 FactoryGirl.define do
   factory :participant do |f|
-    f.first_name "John"
-    f.last_name  "Doe"
-  end
+    sequence :first_name do |n|
+      "John#{n}"
+    end
+    sequence :last_name do |n|
+      "Doe#{n}"
+    end
+end
 end

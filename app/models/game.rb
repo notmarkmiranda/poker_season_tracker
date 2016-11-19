@@ -7,6 +7,13 @@ class Game < ApplicationRecord
   validates_presence_of(:buy_in)
   validates_presence_of(:season_id)
 
+
+  def calculate_scores
+    players.each do |p|
+      p.update(score: p.get_score)
+    end
+  end
+
   def player_count
     players.count
   end
@@ -42,6 +49,6 @@ class Game < ApplicationRecord
   end
 
   def number_of_players
-    
+
   end
 end

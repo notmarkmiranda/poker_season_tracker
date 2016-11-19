@@ -25,8 +25,8 @@ RSpec.describe Player, type: :model do
     end
 
     it "returns top and bottom scores" do
-      expect(@tyler.score).to eq(4.74)
-      expect(@scott.score).to eq(1.35)
+      expect(@tyler.get_score).to eq(4.74)
+      expect(@scott.get_score).to eq(1.35)
     end
   end
 end

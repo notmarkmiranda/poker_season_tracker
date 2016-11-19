@@ -7,7 +7,12 @@ class Player < ApplicationRecord
   validates_uniqueness_of :participant_id, scope: :game_id
   validates_uniqueness_of :finishing_place, scope: :game_id
 
-  def score
+  # def score
+  #   score = score_math
+  #   (score * 100).floor / 100.0
+  # end
+
+  def get_score
     score = score_math
     (score * 100).floor / 100.0
   end
