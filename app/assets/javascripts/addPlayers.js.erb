@@ -25,7 +25,7 @@ $(document).ready(function() {
 			$('.typeahead').val("");
 		}
 	})
-	$("#submit").click(function(){
+	$("#gameSubmit").click(function(){
 		var data = getFinishers()
 		var chars = window.location.pathname.split('');
 		var gameId= chars[7]+chars[8];
@@ -38,7 +38,7 @@ $(document).ready(function() {
 		    dataType: 'json',
 		    async: false,
 		    success: function(msg) {
-		        // alert(msg);
+		        console.log(msg);
 		    }
 		});
 	})
@@ -47,13 +47,19 @@ $(document).ready(function() {
 function addPlayer(player) {
 
   $("#playersOnly").prepend(''+
-	'<div class="player" data-id="'+ player.id + '" data-name="' + player.name +'">' +
-		player.name +
-		'<input type="button" name="name" value="eliminated" class="elim" data-name="' + player.name +'">' +
+	'<div class="player" data-id="'+ player.id + '" data-name="' + player.name +'" class="form-group row">' +
+		'<div class="playerName">' + player.name + '</div>' +
+    '<div class="playerBtns">' +
+      '<input type="button" name="name" value="Remove" class="playerRemove" data-name="' + player.name +'">' +
+  		'<input type="button" name="name" value="Eliminated" class="playerElim" data-name="' + player.name +'">' +
+    '</div>'+
 	'</div>')
 
-	$(".player").on('click','input[data-name="'+ player.name +'"]', function(){
+	$(".player").on('click','input.playerElim[data-name="'+ player.name +'"]', function(){
 		eliminatePlayer(player)
+	});
+  $(".player").on('click','input.playerRemove[data-name="'+ player.name +'"]', function(){
+		$('[data-name="'+ player.name +'"]').remove()
 	});
 }
 
@@ -61,11 +67,15 @@ var sadTrombone = new Audio("<%= asset_path('Sad_Trombone.wav') %>");
 
 var eliminatePlayer = function(player){
 	sadTrombone.play();
-	$('input[data-name="'+ player.name +'"]').parent().remove()
+	$('[data-name="'+ player.name +'"]').remove()
 
 	$("#eliminatedPlayers").prepend(''+
 	'<div class="player" data-id="'+ player.id + '" data-name="' + player.name +'">' +
-		player.name +
+		'<div class="playerName">' + player.name + '</div>' +
+    '<div class="playerBtns">' +
+      '<input type="button" name="name" value="Remove" class="playerRemove" data-name="' + player.name +'">' +
+      '<input type="button" name="name" value="Eliminated" class="playerElim" data-name="' + player.name +'">' +
+    '</div>'+
 	'</div>')
 }
 
@@ -80,8 +90,5 @@ var getFinishers = function(){
     }
     finishers.push(player)
   })
-
-
-  console.log(finishers)
 	return finishers;
 }
