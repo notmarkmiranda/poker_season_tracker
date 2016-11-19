@@ -9,65 +9,79 @@ $(document).ready(function() {
 		$input.change(function() {
 			  var current = $input.typeahead("getActive");
 		    if (current) {
-		        // Some item from your model is active!
 		        if (current.name == $input.val()) {
 								console.log(current)
 								$input.val("")
-								addPlayer(current, "#playersOnly")
-									//
-		            // This means the exact match is found. Use toLowerCase() if you want case insensitive match.
-		        } else {
-		            // This means it is only a partial match, you can either add a new item
-		            // or take the active if you don't want new items
+								addPlayer(current)
 		        }
-		    } else {
-		        // Nothing is active so it is a new value (or maybe empty value)
 		    }
 		});
   })
 
-	$("#eliminatedPlayers")
-
-
 	$("#newPlayerButton").click(function(){
 		var name = $('.typeahead').val()
 		if(name){
-			addPlayer({name: name , id: 0}, "#playersOnly");
+			addPlayer({name: name , id: 0});
 			$('.typeahead').val("");
 		}
 	})
-
-
-
-
+	$("#submit").click(function(){
+		var data = getFinishers()
+		var chars = window.location.pathname.split('');
+		var gameId= chars[7]+chars[8];
+		console.log(gameId)
+		$.ajax({
+		    url: '/api/v1/games/'+ gameId,
+		    type: 'patch',
+		    data: JSON.stringify(data),
+		    contentType: 'application/json; charset=utf-8',
+		    dataType: 'json',
+		    async: false,
+		    success: function(msg) {
+		        // alert(msg);
+		    }
+		});
+	})
 })
+
+function addPlayer(player) {
+
+  $("#playersOnly").prepend(''+
+	'<div class="player" data-id="'+ player.id + '" data-name="' + player.name +'">' +
+		player.name +
+		'<input type="button" name="name" value="eliminated" class="elim" data-name="' + player.name +'">' +
+	'</div>')
+
+	$(".player").on('click','input[data-name="'+ player.name +'"]', function(){
+		eliminatePlayer(player)
+	});
+}
 
 var sadTrombone = new Audio("<%= asset_path('Sad_Trombone.wav') %>");
 
+var eliminatePlayer = function(player){
+	sadTrombone.play();
+	$('input[data-name="'+ player.name +'"]').parent().remove()
 
-function addPlayer(player, location) {
-	var options = ""
-
-	if(location === "#playersOnly"){
-		options = '<input type="button" name="name" value="eliminated" class="elim" data-name="' + player.name +'">';
-	}else if(location === "#eliminatedPlayers"){
-		$('input[data-name="'+ player.name +'"]').parent().remove()
-		options= ""
-    sadTrombone.play();
-	}
-
-  $(location).prepend('<div class="player" data-id="'+ player.id + '" data-name="' + player.name +'">' + player.name + options +'</div>')
-
-	if(location === "#playersOnly"){
-		$(".player").on('click','input[data-name="'+ player.name +'"]', function(){
-			addPlayer(player,"#eliminatedPlayers")
-		});
-	}
+	$("#eliminatedPlayers").prepend(''+
+	'<div class="player" data-id="'+ player.id + '" data-name="' + player.name +'">' +
+		player.name +
+	'</div>')
 }
 
+var getFinishers = function(){
+	var finishers = []
+  var players = $("#eliminatedPlayers").children()
+	$("#eliminatedPlayers").children().each(function(index){
+    var player = {
+        name: $(players[index]).data("name"),
+        id: $(players[index]).data("id"),
+        buyBack: false
+    }
+    finishers.push(player)
+  })
 
 
-
-function thing () {
-  return ["yes", "no"]
+  console.log(finishers)
+	return finishers;
 }
