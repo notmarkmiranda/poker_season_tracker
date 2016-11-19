@@ -6,13 +6,25 @@
           <h5 class="list-group-item-heading">Game #<%= @game.id %></h5>
           <p class="list-group-item-text"><%= @game.full_formatted_date %></p>
         </div>
-        <div class="list-group-item list-group-item-action">
-          <select name="player_count" id="player_count" class="form-control">
+
+        <div class="list-group-item list-group-item-action" id="playersOnly">
+            <input type="text_field" name="name" value="" id="newPlayer" data-provide="typeahead" class="typeahead">
+            <input type="button" name="name" value="+" id="newPlayerButton">
+        </div>
+
+
+        <!--
+          <div class="list-group-item list-group-item-action">
+           <select name="player_count" id="player_count" class="form-control">
             <option value="">Make a Choice</option>
             <% [*5..20].each do |i| %>
               <option value="<%= i %>"><%= i %></option>
             <% end %>
           </select>
+        </div>
+      -->
+        <div class="list-group-item list-group-item-action" id="eliminatedPlayers">
+
         </div>
       </div>
     </div>
