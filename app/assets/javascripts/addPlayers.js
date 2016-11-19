@@ -58,6 +58,18 @@ function addPlayer(player, location) {
 	}
 }
 
-function thing () {
-  return ["yes", "no"]
-}
+$("#submit").click(function(){
+	var data = getFinishers()
+	$.ajax(
+	   {
+	        url: "Ajax.ashx",
+	        type: "POST",
+	        data: data,
+	        dataType: 'json',
+	        async: false,
+	        success: function(msg) {
+	            alert(msg);
+	        }
+	    }
+	);
+})
