@@ -9,25 +9,14 @@ $(document).ready(function() {
 		$input.change(function() {
 			  var current = $input.typeahead("getActive");
 		    if (current) {
-		        // Some item from your model is active!
 		        if (current.name == $input.val()) {
 								console.log(current)
 								$input.val("")
 								addPlayer(current, "#playersOnly")
-									//
-		            // This means the exact match is found. Use toLowerCase() if you want case insensitive match.
-		        } else {
-		            // This means it is only a partial match, you can either add a new item
-		            // or take the active if you don't want new items
 		        }
-		    } else {
-		        // Nothing is active so it is a new value (or maybe empty value)
 		    }
 		});
   })
-
-	$("#eliminatedPlayers")
-
 
 	$("#newPlayerButton").click(function(){
 		var name = $('.typeahead').val()
@@ -36,7 +25,23 @@ $(document).ready(function() {
 			$('.typeahead').val("");
 		}
 	})
-
+	$("#submit").click(function(){
+		var data = getFinishers()
+		var chars = window.location.pathname.split('');
+		var gameId= chars[7]+chars[8];
+		console.log(gameId)
+		$.ajax({
+		    url: '/api/v1/games/'+ gameId,
+		    type: 'patch',
+		    data: JSON.stringify(data),
+		    contentType: 'application/json; charset=utf-8',
+		    dataType: 'json',
+		    async: false,
+		    success: function(msg) {
+		        alert(msg);
+		    }
+		});
+	})
 })
 
 function addPlayer(player, location) {
@@ -59,23 +64,21 @@ function addPlayer(player, location) {
 }
 
 var getFinishers = function(){
-	var finishers = []
-	
+	var finishers = [
+		{
+			name:"Mark Harris",
+			id: 1
+		},
+		{
+			name: "Andrew Fullerton",
+			id: 0
+		},
+		{
+			name: "Mark Miranda",
+			id: 3
+		}
+	]
+
 
 	return finishers;
 }
-
-$("#submit").click(function(){
-	var data = getFinishers()
-	$.ajax({
-	    url: '/api/v1/participants',
-	    type: 'POST',
-	    data: JSON.stringify(data),
-	    contentType: 'application/json; charset=utf-8',
-	    dataType: 'json',
-	    async: false,
-	    success: function(msg) {
-	        alert(msg);
-	    }
-	});
-})
