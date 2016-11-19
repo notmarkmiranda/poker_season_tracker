@@ -58,18 +58,24 @@ function addPlayer(player, location) {
 	}
 }
 
+var getFinishers = function(){
+	var finishers = []
+	
+
+	return finishers;
+}
+
 $("#submit").click(function(){
 	var data = getFinishers()
-	$.ajax(
-	   {
-	        url: "Ajax.ashx",
-	        type: "POST",
-	        data: data,
-	        dataType: 'json',
-	        async: false,
-	        success: function(msg) {
-	            alert(msg);
-	        }
+	$.ajax({
+	    url: '/api/v1/participants',
+	    type: 'POST',
+	    data: JSON.stringify(data),
+	    contentType: 'application/json; charset=utf-8',
+	    dataType: 'json',
+	    async: false,
+	    success: function(msg) {
+	        alert(msg);
 	    }
-	);
+	});
 })
