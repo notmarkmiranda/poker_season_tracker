@@ -2,6 +2,16 @@ class Participant < ApplicationRecord
   has_many :players
   has_many :games, through: :players
 
+  has_many :nemesis_relationships, class_name: "Nemesis",
+                                  foreign_key: "nemesis_id",
+                                  dependent: :destroy
+  has_many :nemeses, through: :nemesis_relationships, source: :nemesis
+
+  has_many :stalker_relationships, class_name:  "Nemesis",
+                                   foreign_key: "stalker_id",
+                                   dependent:   :destroy
+  has_many :stalkers, through: :stalker_relationships, source: :stalker
+
   validates_presence_of :first_name
   validates_presence_of :last_name
   validates :first_name, uniqueness: { scope: :last_name, case_sensitive: false }
