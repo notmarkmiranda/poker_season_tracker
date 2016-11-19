@@ -53,9 +53,7 @@ class Participant < ApplicationRecord
   end
 
   def total_points
-    score = games.map do |game|
-      game.players.find_by(participant_id: id).score
-    end.reduce(:+)
+    score = players.sum(:score)
     (score * 100).floor / 100.0
   end
 

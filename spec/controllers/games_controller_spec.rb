@@ -170,4 +170,23 @@ RSpec.describe GamesController, type: :controller do
       expect(response).to redirect_to games_path
     end
   end
+
+  describe "finishing a game recalculates score on update" do
+    before do
+      @game = create(:game)
+
+      @player1 = create(:player, game_id: @game.id, finishing_place: 1)
+      @player2 = create(:player, game_id: @game.id, finishing_place: 2)
+    end
+
+    it "calculates the score on update" do
+      expect(@player1.score).to be_nil
+      expect(@player2.score).to be_nil
+
+      patch :update, params: { id: @game.id, game: attributes_for(:game, completed: true) }
+
+      expect(@player1.reload.score).to eq(0.7)
+      expect(@player2.reload.score).to eq(0.47)
+    end
+  end
 end
