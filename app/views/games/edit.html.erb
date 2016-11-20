@@ -1,3 +1,4 @@
+
 <div class="container">
   <div class="row">
     <div class="col-md-6 offset-md-3">
@@ -7,11 +8,16 @@
           <p class="list-group-item-text"><%= @game.full_formatted_date %></p>
         </div>
 
-        <div class="list-group-item list-group-item-action" id="playersOnly">
-            <input type="text_field" name="name" value="" id="newPlayer" data-provide="typeahead" class="typeahead">
-            <input type="button" name="name" value="+" id="newPlayerButton">
+        <div class="list-group-item">
+          <h6>Current Players</h6>
+          <div id="playersOnly">
+          </div>
         </div>
 
+        <div class="list-group-item ">
+          <input type="text" name="name" value="" id="newPlayer" data-provide="typeahead" class="typeahead" placeholder="Player Name">
+          <input type="button" name="name" value="add" id="newPlayerButton">
+        </div>
 
         <!--
           <div class="list-group-item list-group-item-action">
@@ -23,10 +29,34 @@
           </select>
         </div>
       -->
-        <div class="list-group-item list-group-item-action" id="eliminatedPlayers">
-
+        <div class="list-group-item" >
+          <h6>Eliminated Players</h6>
+            <div id="eliminatedPlayers">
+            </div>
         </div>
-        <input type="button" name="name" value="submit" id="submit">
+      </div>
+      <input type="button" name="name" value="submit" class="btn btn-primary gameSubmit" id="gameSubmit">
+
+    </div>
+  </div>
+</div>
+
+<!-- Modal -->
+<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+        <h4 class="modal-title" id="myModalLabel">Modal title</h4>
+      </div>
+      <div class="modal-body">
+        O man, <span id="modalPlayerName">{player name}</span> sucks, but are you sure they got eliminated?
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">nope, fat finger</button>
+        <button type="button" class="btn btn-primary" id="playerElimSubmit">yea, they are gone</button>
       </div>
     </div>
   </div>

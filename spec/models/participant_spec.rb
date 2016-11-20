@@ -50,4 +50,15 @@ RSpec.describe Participant, type: :model do
     tyler = Participant.find_by(first_name: "Tyler")
     expect(tyler.average_score).to eq(4.74)
   end
+
+  it "#display_name" do
+    p = Participant.create(first_name: "John", last_name: "Doe")
+    expect(p.display_name).to eq("John D.")
+  end
+
+  it "#full_name" do
+    p = Participant.create(first_name: "John", last_name: "Doe")
+    expect(p.full_name).to eq("John Doe")
+  end
+
 end
