@@ -36,6 +36,10 @@ class Participant < ApplicationRecord
     total_games_count - evaluated_game_count
   end
 
+  def global_score
+    calculate_competition_score("games")
+  end
+
   def evaluated_score
     if attendance_validation
       calculate_competition_score("evaluated_games")
@@ -59,6 +63,14 @@ class Participant < ApplicationRecord
 
   def average_score
     (total_points / total_games_count * 100).floor / 100.0
+  end
+
+  def global_game_top_three_count
+    players.where(finishing_place: [1,2,3]).count
+  end
+
+  def global_win_count
+    players.where(finishing_place: 1).count
   end
 
   def game_top_three_count
@@ -125,10 +137,14 @@ class Participant < ApplicationRecord
   end
 
   def calculate_competition_score(games)
-    top_5 = self.send(games).map do |game|
-      game.players.find_by(participant_id: id).score
+    (players.order(score: :desc).limit(5).sum(:score) / 5 * 1000).floor / 1000.0
+  end
+
+  def pad(arr)
+    until arr.length == 5
+      arr.push(0)
     end
-    skim(top_5)
+    arr
   end
 
   def skim(arr)
