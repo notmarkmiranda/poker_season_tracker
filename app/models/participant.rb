@@ -2,6 +2,16 @@ class Participant < ApplicationRecord
   has_many :players
   has_many :games, through: :players
 
+  has_many :nemesis_relationships, class_name: "Nemesis",
+                                  foreign_key: "nemesis_id",
+                                  dependent: :destroy
+  has_many :nemeses, through: :nemesis_relationships, source: :nemesis
+
+  has_many :stalker_relationships, class_name:  "Nemesis",
+                                   foreign_key: "stalker_id",
+                                   dependent:   :destroy
+  has_many :stalkers, through: :stalker_relationships, source: :stalker
+
   validates_presence_of :first_name
   validates_presence_of :last_name
   validates :first_name, uniqueness: { scope: :last_name, case_sensitive: false }
@@ -26,6 +36,10 @@ class Participant < ApplicationRecord
     total_games_count - evaluated_game_count
   end
 
+  def global_score
+    calculate_competition_score("games")
+  end
+
   def evaluated_score
     if attendance_validation
       calculate_competition_score("evaluated_games")
@@ -43,14 +57,20 @@ class Participant < ApplicationRecord
   end
 
   def total_points
-    score = games.map do |game|
-      game.players.find_by(participant_id: id).score
-    end.reduce(:+)
+    score = players.sum(:score)
     (score * 100).floor / 100.0
   end
 
   def average_score
     (total_points / total_games_count * 100).floor / 100.0
+  end
+
+  def global_game_top_three_count
+    players.where(finishing_place: [1,2,3]).count
+  end
+
+  def global_win_count
+    players.where(finishing_place: 1).count
   end
 
   def game_top_three_count
@@ -117,10 +137,14 @@ class Participant < ApplicationRecord
   end
 
   def calculate_competition_score(games)
-    top_5 = self.send(games).map do |game|
-      game.players.find_by(participant_id: id).score
+    (players.order(score: :desc).limit(5).sum(:score) / 5 * 1000).floor / 1000.0
+  end
+
+  def pad(arr)
+    until arr.length == 5
+      arr.push(0)
     end
-    skim(top_5)
+    arr
   end
 
   def skim(arr)

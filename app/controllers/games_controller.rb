@@ -36,6 +36,7 @@ class GamesController < ApplicationController
   def update
     @game = Game.find(params[:id])
     if @game.update(game_params)
+      @game.calculate_scores
       redirect_to @game
     else
       render :edit

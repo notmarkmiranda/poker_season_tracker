@@ -101,6 +101,7 @@ Player.create(participant_id: bobby.id,
 Player.create(participant_id: zach.id,
   game_id: game_110515.id,
   finishing_place: 6)
+
 # END OF NOVEMBER 5 GAME
 
 
@@ -142,6 +143,7 @@ Player.create(participant_id: tyler.id,
 Player.create(participant_id: zach.id,
   game_id: game_120715.id,
   finishing_place: 7)
+
 # END OF DECEMBER 7 GAME
 
 
@@ -179,6 +181,8 @@ Player.create(participant_id: mike.id,
 Player.create(participant_id: tyler.id,
   game_id: game_010516.id,
   finishing_place: 7)
+
+
 # END OF JANUARY 5 GAME
 
 
@@ -212,6 +216,7 @@ Player.create(participant_id: chris.id,
 Player.create(participant_id: mike.id,
   game_id: game_021516.id,
   finishing_place: 6)
+
 # END OF FEBRUARY 15 GAME
 
 
@@ -249,6 +254,7 @@ Player.create(participant_id: mark_m.id,
 Player.create(participant_id: tyler.id,
   game_id: game_031516.id,
   finishing_place: 7)
+
 # END OF MARCH 15 GAME
 
 
@@ -286,6 +292,7 @@ Player.create(participant_id: mike.id,
 Player.create(participant_id: bobby.id,
   game_id: game_040516.id,
   finishing_place: 7)
+
 # END OF APRIL 5 GAME
 
 
@@ -327,6 +334,7 @@ Player.create(participant_id: mike.id,
 Player.create(participant_id: tyler.id,
   game_id: game_051116.id,
   finishing_place: 8)
+
 # END OF MAY 11 GAME
 
 
@@ -510,3 +518,9 @@ Player.create(participant_id: scott.id,
 
 # User
 User.create(email: 'markmiranda51@gmail.com', password: 'password')
+
+
+# Calculate game scores
+Game.all.each do |g|
+  g.calculate_scores
+end

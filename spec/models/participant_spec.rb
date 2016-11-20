@@ -7,6 +7,12 @@ RSpec.describe Participant, type: :model do
     it { should validate_presence_of(:first_name) }
     it { should validate_presence_of(:last_name) }
     it { should validate_uniqueness_of(:first_name).scoped_to(:last_name).case_insensitive }
+
+    it { should have_many(:nemesis_relationships) }
+    it { should have_many(:nemeses).through(:nemesis_relationships) }
+    it { should have_many(:stalker_relationships) }
+    it { should have_many(:stalkers).through(:stalker_relationships) }
+
   end
 
   it "#evaluated_game_count" do
@@ -28,9 +34,11 @@ RSpec.describe Participant, type: :model do
 
   it "#total_points" do
     create_the_game
+    Game.last.calculate_scores
     tyler = Participant.find_by(first_name: "Tyler")
     mark  = Participant.find_by(first_name: "Mark")
     scott = Participant.find_by(first_name: "Scott")
+
     expect(tyler.total_points).to eq(4.74)
     expect(mark.total_points).to eq(2.37)
     expect(scott.total_points).to eq(1.35)
@@ -38,7 +46,19 @@ RSpec.describe Participant, type: :model do
 
   it "#average_score" do
     create_the_game
+    Game.last.calculate_scores
     tyler = Participant.find_by(first_name: "Tyler")
     expect(tyler.average_score).to eq(4.74)
   end
+
+  it "#display_name" do
+    p = Participant.create(first_name: "John", last_name: "Doe")
+    expect(p.display_name).to eq("John D.")
+  end
+
+  it "#full_name" do
+    p = Participant.create(first_name: "John", last_name: "Doe")
+    expect(p.full_name).to eq("John Doe")
+  end
+
 end
