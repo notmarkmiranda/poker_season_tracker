@@ -25,7 +25,7 @@ julius       = Participant.create(first_name: "Julius", last_name: "Bogdan")
 
 
 # START OF NOVEMBER 15 GAME
-game_111516 = Game.create(date: Date.new(2016, 11, 15),
+game_111516 = Game.create!(date: Date.new(2016, 11, 15),
   buy_in: 15,
   completed: true,
   time_played: "03:30:00",

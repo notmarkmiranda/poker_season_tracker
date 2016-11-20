@@ -82,3 +82,27 @@ div.participant-main {
 div.list-group-item.list-group-item-action.stat-line {
   background-color: #e7e7e7;
 }
+
+.player{
+  display: -webkit-flex;
+    display: flex;
+  justify-content: space-between;
+  flex-direction: row;
+  flex-wrap: nowrap;
+  align-items:center;
+  border-bottom: 1px solid #e8e5e5;
+  margin-bottom: 10px;
+  padding: 5px;
+  font-size: .8rem;
+  &:last-child {
+    border-bottom:none;
+    margin-bottom: 0px;
+  }
+}
+.playerElim{
+  margin-left:10px;
+}
+.gameSubmit{
+  margin-top:10px;
+  float:right;
+}

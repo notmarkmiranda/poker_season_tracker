@@ -1,0 +1,108 @@
+$(document).ready(function() {
+  var playerArray = []
+  playerArray = $.getJSON('/api/v1/participants', function (participants) {
+		for (var i = 0; i < participants.length; i++) {
+			participants[i].name = participants[i].first_name +" " + participants[i].last_name
+		}
+		var $input = $('.typeahead')
+		$input.typeahead({ source:participants });
+		$input.change(function() {
+			  var current = $input.typeahead("getActive");
+		    if (current) {
+		        if (current.name == $input.val()) {
+								$input.val("")
+								addPlayer(current)
+		        }
+		    }
+		});
+  });
+
+	$("#newPlayerButton").click(function(){
+		var name = $('.typeahead').val()
+		if(name){
+			addPlayer({name: name , id: 0, buyback: false});
+			$('.typeahead').val("");
+		}
+	})
+	$("#gameSubmit").click(function(){
+		var data = getFinishers()
+		var chars = window.location.pathname.split('');
+		var gameId= chars[7]+chars[8];
+		$.ajax({
+		    url: '/api/v1/games/'+ gameId,
+		    type: 'patch',
+		    data: JSON.stringify(data),
+		    contentType: 'application/json; charset=utf-8',
+		    dataType: 'json',
+		    async: false,
+		    success: function(msg) {
+		        console.log(msg);
+		    }
+		});
+	})
+
+  $("#myModal").find("#playerElimSubmit").click(function(){
+    var player = createPlayer($("#playerElimSubmit").data("name"), $("#playerElimSubmit").data("id"), false)
+    console.log(player)
+    eliminatePlayer(player);
+    $("#myModal").modal("hide");
+  })
+})
+
+function addPlayer(player) {
+
+  $("#playersOnly").prepend(''+
+	'<div class="player" data-id="'+ player.id + '" data-name="' + player.name +'" class="form-group row">' +
+		'<div class="playerName">' + player.name + '</div>' +
+    '<div class="playerBtns">' +
+      '<input type="button" name="name" value="Remove" class="playerRemove" data-name="' + player.name +'">' +
+  		'<input type="button" name="name" value="Eliminated" class="playerElim" data-name="' + player.name +'">' +
+    '</div>'+
+	'</div>')
+
+	$(".player").on('click','input.playerElim[data-name="'+ player.name +'"]', function(){
+    var $modal = $('#myModal')
+    $modal.modal('show');
+    $modal.find("#modalPlayerName").text(player.name);
+    var $submitbtn = $modal.find("#playerElimSubmit");
+    $submitbtn.data("name", player.name);
+    $submitbtn.data("id", player.id);
+	});
+
+  $(".player").on('click','input.playerRemove[data-name="'+ player.name +'"]', function(){
+		$('[data-name="'+ player.name +'"]').remove()
+	});
+}
+
+var sadTrombone = new Audio("<%= asset_path('Sad_Trombone.wav') %>");
+
+var eliminatePlayer = function(player){
+	sadTrombone.play();
+	$('[data-name="'+ player.name +'"]').remove()
+
+	$("#eliminatedPlayers").prepend(''+
+	'<div class="player" data-id="'+ player.id + '" data-name="' + player.name +'">' +
+		'<div class="playerName">' + player.name + '</div>' +
+    '<div class="playerBtns">' +
+      '<input type="button" name="name" value="Rebuy" class="playerRebuy" data-name="' + player.name +'">' +
+    '</div>'+
+	'</div>')
+}
+
+var getFinishers = function(){
+	var finishers = []
+  var players = $("#eliminatedPlayers").children()
+	$("#eliminatedPlayers").children().each(function(index){
+    var player = createPlayer($(players[index]).data("name"), $(players[index]).data("id"), false);
+    finishers.push(player)
+  });
+	return finishers;
+}
+
+var createPlayer = function(name, id, buyback){
+  return {
+      "name": name,
+      "id": id,
+      "buyBack": buyback
+  }
+}

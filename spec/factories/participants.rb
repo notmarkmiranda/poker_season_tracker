@@ -6,5 +6,5 @@ FactoryGirl.define do
     sequence :last_name do |n|
       "Doe#{n}"
     end
-end
+  end
 end
