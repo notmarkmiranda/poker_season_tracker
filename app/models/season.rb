@@ -23,13 +23,26 @@ class Season < ApplicationRecord
     games.count
   end
 
-  def winner
+  def determine_standings
     standings = {}
     players.each do |player|
       check_for_player(standings, player)
       standings[player.participant_id] << player.get_score
     end
-    parse_standings(standings)
+    standings
+  end
+
+  def ordered_standings
+    standings = determine_standings
+    ordered = parse_standings(standings)
+
+    format_standings(ordered)
+  end
+
+  def winner
+    standings = determine_standings
+    ordered = parse_standings(standings)
+    format_winner(ordered)
   end
 
   def self.current
@@ -48,13 +61,19 @@ class Season < ApplicationRecord
 
   private
 
+  def format_standings(ordered)
+    ordered.map do |participant_id, score|
+      "#{Participant.find(participant_id).display_name} | #{score}"
+    end
+  end
+
   def parse_standings(standings)
     top = {}
     standings.each do |id, scores|
       eligible_scores = scores.sort.last(5)
       top[id] = ((eligible_scores.reduce(:+) / eligible_scores.count) * 100).floor / 100.0
     end
-    format_winner(top)
+    top
   end
 
   def format_winner(top)

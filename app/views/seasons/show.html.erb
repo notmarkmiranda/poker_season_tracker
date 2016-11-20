@@ -1,6 +1,6 @@
 <div class="container">
   <div class="row">
-    <div class="col-md-6 offset-md-3">
+    <div class="col-md-8">
       <div class="list-group">
         <div class="list-group-item list-group-item-action seasons">
           <h5 class="list-group-item-heading">Season #<%= @season.id %></h5>
@@ -12,8 +12,22 @@
           <p class="list-group-item-text">Players: <span><%= @season.player_count %></span></p>
           <p class="list-group-item-text">Cumulative Pot Size: <span><%= number_to_currency(@season.cumulative_pot_size) %></span></p>
         </div>
-        <% @season.games.each do |game| %>
+        <% @season.games.sort_by { |g| g.date }.reverse.each do |game| %>
           <%= render partial: "shared/game_deets", locals: { game: game } %>
+        <% end %>
+      </div>
+    </div>
+    <div class="col-md-4">
+      <div class="list-group">
+        <div class="list-group-item list-group-item-action games">
+          <p class="list-group-item-text">&nbsp;</p>
+          <h5 class="list-group-item-heading">Season Standings</h5>
+          <p class="list-group-item-text">&nbsp;</p>
+        </div>
+        <% @season.ordered_standings.each_with_index do |player, index| %>
+        <div class="list-group-item list-group-item-action div-row">
+          <p class="list-group-item-text"><%= index + 1 %>. <%= player %></p>
+        </div>
         <% end %>
       </div>
     </div>
