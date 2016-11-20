@@ -74,10 +74,9 @@ function addPlayer(player) {
 	});
 }
 
-var sadTrombone = new Audio("<%= asset_path('Sad_Trombone.wav') %>");
 
 var eliminatePlayer = function(player){
-	sadTrombone.play();
+	audioElimiate.play();
 	$('[data-name="'+ player.name +'"]').remove()
 
 	$("#eliminatedPlayers").prepend(''+
@@ -88,6 +87,8 @@ var eliminatePlayer = function(player){
     '</div>'+
 	'</div>')
 }
+
+
 
 var getFinishers = function(){
 	var finishers = []
