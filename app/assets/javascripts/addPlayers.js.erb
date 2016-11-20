@@ -5,18 +5,17 @@ $(document).ready(function() {
 			participants[i].name = participants[i].first_name +" " + participants[i].last_name
 		}
 		var $input = $('.typeahead')
-		$input.typeahead({ source:participants })
+		$input.typeahead({ source:participants });
 		$input.change(function() {
 			  var current = $input.typeahead("getActive");
 		    if (current) {
 		        if (current.name == $input.val()) {
-								console.log(current)
 								$input.val("")
 								addPlayer(current)
 		        }
 		    }
 		});
-  })
+  });
 
 	$("#newPlayerButton").click(function(){
 		var name = $('.typeahead').val()
@@ -29,7 +28,6 @@ $(document).ready(function() {
 		var data = getFinishers()
 		var chars = window.location.pathname.split('');
 		var gameId= chars[7]+chars[8];
-		console.log(gameId)
 		$.ajax({
 		    url: '/api/v1/games/'+ gameId,
 		    type: 'patch',
@@ -42,6 +40,13 @@ $(document).ready(function() {
 		    }
 		});
 	})
+
+  $("#myModal").find("#playerElimSubmit").click(function(){
+    var player = createPlayer($("#playerElimSubmit").data("name"), $("#playerElimSubmit").data("id"), false)
+    console.log(player)
+    eliminatePlayer(player);
+    $("#myModal").modal("hide");
+  })
 })
 
 function addPlayer(player) {
@@ -56,8 +61,14 @@ function addPlayer(player) {
 	'</div>')
 
 	$(".player").on('click','input.playerElim[data-name="'+ player.name +'"]', function(){
-		eliminatePlayer(player)
+    var $modal = $('#myModal')
+    $modal.modal('show');
+    $modal.find("#modalPlayerName").text(player.name);
+    var $submitbtn = $modal.find("#playerElimSubmit");
+    $submitbtn.data("name", player.name);
+    $submitbtn.data("id", player.id);
 	});
+
   $(".player").on('click','input.playerRemove[data-name="'+ player.name +'"]', function(){
 		$('[data-name="'+ player.name +'"]').remove()
 	});
@@ -73,8 +84,7 @@ var eliminatePlayer = function(player){
 	'<div class="player" data-id="'+ player.id + '" data-name="' + player.name +'">' +
 		'<div class="playerName">' + player.name + '</div>' +
     '<div class="playerBtns">' +
-      '<input type="button" name="name" value="Remove" class="playerRemove" data-name="' + player.name +'">' +
-      '<input type="button" name="name" value="Eliminated" class="playerElim" data-name="' + player.name +'">' +
+      '<input type="button" name="name" value="Rebuy" class="playerRebuy" data-name="' + player.name +'">' +
     '</div>'+
 	'</div>')
 }
@@ -83,12 +93,16 @@ var getFinishers = function(){
 	var finishers = []
   var players = $("#eliminatedPlayers").children()
 	$("#eliminatedPlayers").children().each(function(index){
-    var player = {
-        name: $(players[index]).data("name"),
-        id: $(players[index]).data("id"),
-        buyBack: false
-    }
+    var player = createPlayer($(players[index]).data("name"), $(players[index]).data("id"), false);
     finishers.push(player)
-  })
+  });
 	return finishers;
+}
+
+var createPlayer = function(name, id, buyback){
+  return {
+      "name": name,
+      "id": id,
+      "buyBack": buyback
+  }
 }
