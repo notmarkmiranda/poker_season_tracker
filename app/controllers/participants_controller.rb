@@ -1,6 +1,6 @@
 class ParticipantsController < ApplicationController
   def index
-    @participants = Participant.all.sort_by { |p| p.evaluated_score }.reverse
+    @participants = Participant.all.sort_by { |p| p.global_score }.reverse
   end
 
   def show

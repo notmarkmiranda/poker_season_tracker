@@ -27,7 +27,7 @@ class Season < ApplicationRecord
     standings = {}
     players.each do |player|
       check_for_player(standings, player)
-      standings[player.participant_id] << player.score
+      standings[player.participant_id] << player.get_score
     end
     parse_standings(standings)
   end
