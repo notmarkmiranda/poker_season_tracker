@@ -20,7 +20,7 @@ $(document).ready(function() {
 	$("#newPlayerButton").click(function(){
 		var name = $('.typeahead').val()
 		if(name){
-			addPlayer({name: name , id: 0});
+			addPlayer({name: name , id: 0, buyback: false});
 			$('.typeahead').val("");
 		}
 	})
