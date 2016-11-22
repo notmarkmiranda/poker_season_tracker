@@ -35,8 +35,8 @@ $(document).ready(function() {
 		    contentType: 'application/json; charset=utf-8',
 		    dataType: 'json',
 		    async: false,
-		    success: function(msg) {
-		        console.log(msg);
+		    success: function(result) {
+            showGame(result);
 		    }
 		});
 	})
@@ -105,4 +105,8 @@ var createPlayer = function(name, id, buyback){
       "id": id,
       "buyBack": buyback
   }
+}
+
+var showGame = function(game){
+    window.location = "/games/" + game.id;
 }
