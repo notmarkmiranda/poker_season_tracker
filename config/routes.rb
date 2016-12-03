@@ -10,7 +10,7 @@ Rails.application.routes.draw do
   namespace :api, defaults: { format: :json } do
     namespace :v1 do
       resources :participants, only: [:index, :show]
-      resources :overall_top_five, only: [:index] 
+      resources :overall_rankings, only: [:index] 
       resources :players, only: [:index, :show]
       resources :games, only: [:update]
     end
