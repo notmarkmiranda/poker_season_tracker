@@ -78,7 +78,8 @@ class Participant < ApplicationRecord
   end
 
   def overall_attendance
-    (games.count / Game.count.to_f * 100).floor / 1.0
+    raw_attendance = (games.count / Game.count.to_f * 100)
+    (raw_attendance * 10).floor / 10.0
   end
 
   def current_percentage_attended
@@ -95,7 +96,8 @@ class Participant < ApplicationRecord
   end
 
   def overall_percentage(places)
-    (players.where(finishing_place: places).count / total_games_count.to_f * 100).floor / 1.0
+    raw_percentage = (players.where(finishing_place: places).count / total_games_count.to_f * 100)
+    (raw_percentage * 10).floor / 10.0
   end
 
   def evaluated_overall_percentage(places)

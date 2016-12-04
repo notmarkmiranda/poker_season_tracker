@@ -9,19 +9,26 @@ RSpec.describe "Top Five API Endpoint", type: :request do
     {
       "name" => 'Michael C.',
       "games" => 13,
+      "percent_attended" => 100.0,
       "score" => 7.342,
       "won" => 4,
-      "place" => 6
+      "percent_won" => 30.7,
+      "place" => 6,
+      "percent_placed" => 46.1
+
     }
   }
-  
+
   let(:last_response) {
     {
       "name" => 'Roman G.',
       "games" => 1,
+      "percent_attended" => 7.6,
       "score" => 0.242,
       "won" => 0,
-      "place" => 0
+      "percent_won" => 0,
+      "place" => 0,
+      "percent_placed" => 0
     }
   }
 
