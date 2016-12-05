@@ -79,7 +79,7 @@ class Season < ApplicationRecord
   def format_winner(top)
     win = top.max_by{ |k,v| v }
     winner = Participant.find(win[0])
-    "#{winner.display_name} | #{win[1]}"
+    "#{winner.display_name} | #{win[1]} points"
   end
 
   def check_for_player(standings, player)

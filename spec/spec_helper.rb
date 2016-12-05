@@ -63,7 +63,7 @@ def create_the_game
 end
 
 
-def create_preseason
+def create_season
   # seasons
   preseason = Season.create(active: false)
   season    = Season.create
