@@ -10,9 +10,12 @@ Rails.application.routes.draw do
   namespace :api, defaults: { format: :json } do
     namespace :v1 do
       resources :participants, only: [:index, :show]
-      resources :overall_rankings, only: [:index] 
+      resources :ordered_games, only: [:index]
       resources :players, only: [:index, :show]
-      resources :games, only: [:update]
+      resources :games, only: [:index, :update]
+      resources :seasons, only: [:index]
+
+      get '/overall_rankings', to: 'participants#index'
     end
   end
 

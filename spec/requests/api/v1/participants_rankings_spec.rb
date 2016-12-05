@@ -1,8 +1,8 @@
 require 'rails_helper'
 
-RSpec.describe "Top Five API Endpoint", type: :request do
+RSpec.describe "Overall Rankings API Endpoint", type: :request do
   before do
-    create_preseason
+    create_season
   end
 
   let(:first_response) {
@@ -32,7 +32,7 @@ RSpec.describe "Top Five API Endpoint", type: :request do
     }
   }
 
-  it "returns the overall top 5" do
+  it "returns the overall rankings" do
     get '/api/v1/overall_rankings'
     expect(JSON.parse(response.body).first).to eq(first_response)
     expect(JSON.parse(response.body).last).to eq(last_response)
