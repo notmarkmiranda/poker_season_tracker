@@ -15,7 +15,7 @@ Rails.application.routes.draw do
       resources :games, only: [:index, :update]
       resources :seasons, only: [:index]
 
-      get '/overall_rankings', to: 'participants#index'
+      # get '/overall_rankings', to: 'participants#index'
     end
   end
 

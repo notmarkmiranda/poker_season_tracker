@@ -33,7 +33,7 @@ RSpec.describe "Overall Rankings API Endpoint", type: :request do
   }
 
   it "returns the overall rankings" do
-    get '/api/v1/overall_rankings'
+    get '/api/v1/participants'
     expect(JSON.parse(response.body).first).to eq(first_response)
     expect(JSON.parse(response.body).last).to eq(last_response)
   end
