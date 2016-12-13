@@ -46,8 +46,7 @@ additional_expense: 15)
 # mike
 game_121216.players.create(
 participant_id: mike.id,
-finishing_place: 4,
-additional_expense: 15)
+finishing_place: 4)
 # scott
 game_121216.players.create(
 participant_id: scott.id,
