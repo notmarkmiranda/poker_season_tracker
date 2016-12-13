@@ -71,9 +71,9 @@ class Season < ApplicationRecord
     top = {}
     standings.each do |id, scores|
       eligible_scores = scores.sort.last(5)
-      top[id] = ((eligible_scores.reduce(:+) / eligible_scores.count) * 100).floor / 100.0
+      top[id] = ((eligible_scores.reduce(:+) / 5) * 100).floor / 100.0
     end
-    top
+    Hash[top.sort_by{ |id, score| score }.reverse]
   end
 
   def format_winner(top)
