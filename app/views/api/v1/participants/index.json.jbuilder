@@ -1,5 +1,5 @@
 
-json.array!(@participants) do |participant|
+json.array! @participants.each_with_index.to_a do |participant, index|
   json.name participant.display_name
   json.games participant.games.count
   json.percent_attended participant.overall_attendance

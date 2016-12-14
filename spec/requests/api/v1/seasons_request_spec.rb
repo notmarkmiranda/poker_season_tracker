@@ -19,7 +19,7 @@ RSpec.describe "Season API Endpoint
   let(:last_response) {
     {
       "beginning" => "Nov 05, 2015",
-      "end" => "Oct 18, 2016",
+      "end" => "Ended: Oct 18, 2016",
       "game_count" => 12,
       "cumulative_pot" => 1230,
       "season_leader" => "Michael C. | 4.67 points"
