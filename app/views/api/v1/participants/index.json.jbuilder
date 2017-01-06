@@ -1,6 +1,6 @@
 
 json.array! @participants.each_with_index.to_a do |participant, index|
-  json.name participant.display_name
+  json.name participant.display_name.upcase
   json.games participant.games.count
   json.percent_attended participant.overall_attendance
   json.score participant.global_score
