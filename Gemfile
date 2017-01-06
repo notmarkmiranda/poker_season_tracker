@@ -16,7 +16,6 @@ gem 'bcrypt'
 group  :production do
   gem 'unicorn'
   gem 'rails_12factor'
-  gem 'unicorn'
 end
 
 group :development, :test do
