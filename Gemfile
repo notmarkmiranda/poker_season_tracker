@@ -14,6 +14,7 @@ gem 'responders', '~>2.0'
 gem 'bcrypt'
 
 group  :production do
+  gem 'unicorn'
   gem 'rails_12factor'
   gem 'unicorn'
 end
