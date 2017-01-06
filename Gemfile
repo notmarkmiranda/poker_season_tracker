@@ -1,6 +1,5 @@
 source 'https://rubygems.org'
 
-
 gem 'rails', '~> 5.0.0', '>= 5.0.0.1'
 gem 'pg', '~> 0.18'
 gem 'puma', '~> 3.0'
@@ -17,6 +16,7 @@ gem 'bcrypt'
 group  :production do
   gem 'unicorn'
   gem 'rails_12factor'
+  gem 'unicorn'
 end
 
 group :development, :test do
