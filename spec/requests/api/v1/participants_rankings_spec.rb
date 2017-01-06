@@ -37,4 +37,7 @@ RSpec.describe "Overall Rankings API Endpoint", type: :request do
     expect(JSON.parse(response.body).first).to eq(first_response)
     expect(JSON.parse(response.body).last).to eq(last_response)
   end
+
+  
+
 end
