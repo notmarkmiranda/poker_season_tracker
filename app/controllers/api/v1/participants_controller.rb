@@ -3,7 +3,6 @@ class Api::V1::ParticipantsController < Api::ApiController
 
   def index
     render partial: '/api/v1/participants/participants', locals: { participants: Participant.all.sort_by { |p| p.global_score }.reverse }
-    # @participants = Participant.all.sort_by { |p| p.global_score }.reverse
   end
 
   def show
