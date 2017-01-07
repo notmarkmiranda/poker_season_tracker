@@ -1,16 +1,16 @@
 class Participant < ApplicationRecord
-  has_many :players
-  has_many :games, through: :players
+  has_many :games, through: :players, dependent: :destroy
+  has_many :players, dependent: :destroy
 
   has_many :nemesis_relationships, class_name: "Nemesis",
                                   foreign_key: "nemesis_id",
                                   dependent: :destroy
-  has_many :nemeses, through: :nemesis_relationships, source: :nemesis
+  has_many :nemeses, through: :nemesis_relationships, source: :nemesis, dependent: :destroy
 
   has_many :stalker_relationships, class_name:  "Nemesis",
                                    foreign_key: "stalker_id",
                                    dependent:   :destroy
-  has_many :stalkers, through: :stalker_relationships, source: :stalker
+  has_many :stalkers, through: :stalker_relationships, source: :stalker, dependent: :destroy
 
   validates_presence_of :first_name
   validates_presence_of :last_name
@@ -97,7 +97,7 @@ class Participant < ApplicationRecord
 
   def overall_percentage(places)
     raw_percentage = (players.where(finishing_place: places).count / total_games_count.to_f * 100)
-    (raw_percentage * 10).floor / 10.0
+    raw_percentage.nan? ? 0 : (raw_percentage * 10).floor / 10.0
   end
 
   def evaluated_overall_percentage(places)
