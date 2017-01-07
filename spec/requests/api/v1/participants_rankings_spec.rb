@@ -32,12 +32,16 @@ RSpec.describe "Overall Rankings API Endpoint", type: :request do
     }
   }
 
-  it "returns the overall rankings" do
+  it "GET#index" do
     get '/api/v1/participants'
     expect(JSON.parse(response.body).first).to eq(first_response)
     expect(JSON.parse(response.body).last).to eq(last_response)
   end
 
-  
+  it "GET#show" do
+    p = Participant.find_by(last_name: "Cassano")
+    get "/api/v1/participants/#{p.id}"
+    expect(JSON.parse(response.body)).to eq(first_response)
+  end
 
 end
