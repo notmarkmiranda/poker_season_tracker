@@ -1,10 +1,11 @@
 json.array! participants.each_with_index.to_a do |participant, index|
-  json.name participant.display_name
-  json.games participant.games.count
+  json.id               participant.id
+  json.name             participant.display_name
+  json.games            participant.games.count
   json.percent_attended participant.overall_attendance
-  json.score participant.global_score
-  json.won participant.global_win_count
-  json.percent_won participant.overall_percentage([1])
-  json.place participant.global_game_top_three_count
-  json.percent_placed participant.overall_percentage([1,2,3])
+  json.score            participant.global_score
+  json.won              participant.global_win_count
+  json.percent_won      participant.overall_percentage([1])
+  json.place            participant.global_game_top_three_count
+  json.percent_placed   participant.overall_percentage([1,2,3])
 end

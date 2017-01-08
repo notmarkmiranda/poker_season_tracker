@@ -1,3 +1,4 @@
+json.id               participant.id
 json.name             participant.display_name
 json.games            participant.games.count
 json.percent_attended participant.overall_attendance

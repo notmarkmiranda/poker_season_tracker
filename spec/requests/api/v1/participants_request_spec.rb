@@ -7,6 +7,7 @@ RSpec.describe "Overall Rankings API Endpoint", type: :request do
 
   let(:first_response) {
     {
+      "id" => Participant.find_by(last_name: "Cassano").id,
       "name" => 'Michael C.',
       "games" => 13,
       "percent_attended" => 100.0,
@@ -21,6 +22,7 @@ RSpec.describe "Overall Rankings API Endpoint", type: :request do
 
   let(:last_response) {
     {
+      "id" => Participant.find_by(first_name: "Roman").id,
       "name" => 'Roman G.',
       "games" => 1,
       "percent_attended" => 7.6,
@@ -47,6 +49,7 @@ RSpec.describe "Overall Rankings API Endpoint", type: :request do
 
   let(:updated_response) {
     {
+      "id" => Participant.find_by(last_name: "Cassano").id,
       "name" => 'Mike C.',
       "games" => 13,
       "percent_attended" => 100.0,
@@ -78,17 +81,15 @@ RSpec.describe "Overall Rankings API Endpoint", type: :request do
     end
 
     it "POST#create" do
-      expect(JSON.parse(response.body)).to eq(created_response)
+      expect(JSON.parse(response.body)).to include(created_response)
     end
 
     it "DELETE#destroy" do
       p = Participant.find_by(last_name: "Doe")
       delete "/api/v1/participants/#{p.id}"
-      expect(JSON.parse(response.body)).to_not include(created_response)
+      expect(JSON.parse(response.body)).to_not eq(created_response)
     end
   end
-
-
 
   it "PATCH#update" do
     p = Participant.find_by(last_name: "Cassano")
