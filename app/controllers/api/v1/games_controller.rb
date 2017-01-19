@@ -5,6 +5,10 @@ class Api::V1::GamesController < Api::ApiController
     @games = Game.all.sort_by { |g| g.date }.reverse
   end
 
+  def show
+    @game = Game.find(params[:id])
+  end
+
   def update
     @game    = Game.find(params[:id])
     @game.completed = true

@@ -40,7 +40,7 @@ GEM
       tzinfo (~> 1.1)
     addressable (2.4.0)
     arel (7.1.4)
-    autoprefixer-rails (6.5.1)
+    autoprefixer-rails (6.6.1)
       execjs
     bcrypt (3.1.11)
     better_errors (2.1.1)
@@ -49,9 +49,9 @@ GEM
       rack (>= 0.9.0)
     binding_of_caller (0.7.2)
       debug_inspector (>= 0.0.1)
-    bootstrap (4.0.0.alpha4)
-      autoprefixer-rails (>= 6.0.3)
-      sass (>= 3.4.19)
+    bootstrap-sass (3.3.7)
+      autoprefixer-rails (>= 5.2.1)
+      sass (>= 3.3.4)
     builder (3.2.2)
     capybara (2.8.1)
       addressable
@@ -81,6 +81,8 @@ GEM
       factory_girl (~> 4.7.0)
       railties (>= 3.0.0)
     ffi (1.9.14)
+    font-awesome-rails (4.7.0.1)
+      railties (>= 3.2, < 5.1)
     globalid (0.3.7)
       activesupport (>= 4.1.0)
     i18n (0.7.0)
@@ -227,11 +229,12 @@ DEPENDENCIES
   bcrypt
   better_errors
   binding_of_caller
-  bootstrap (~> 4.0.0.alpha4)
+  bootstrap-sass (~> 3.3.6)
   capybara
   coffee-rails (~> 4.2)
   database_cleaner
   factory_girl_rails
+  font-awesome-rails
   jbuilder (~> 2.5)
   jquery-rails
   launchy

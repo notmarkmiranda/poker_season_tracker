@@ -1,7 +1,74 @@
 <div class="container">
-  <div class="row">
-    <%= render partial: "shared/participants_landing_column", locals: { participants: @participants } %>
-    <%= render partial: "shared/games_landing_column", locals: { games: @games } %>
-    <%= render partial: "shared/seasons_landing_column", locals: { seasons: @seasons } %>
+  <div class="row landing-row">
+    <div class="col-lg-4 col-md-12 landing-component">
+
+      <div class="best-player text-center">
+        <h3 class="column-title">BEST PLAYER</h3>
+        <span class="fa-stack fa-lg fa-xl">
+          <i class="fa fa-circle fa-stack-2x"></i>
+          <i class="fa fa-user-secret fa-stack-1x fa-inverse"></i>
+        </span>
+        <h2><span class="stat"><%= @leader.full_name %></span></h2>
+        <div class="stats">
+          <h4>Won or Placed: <span class="stat"><%= number_to_percentage(@leader.global_won_or_placed_percentage, precision: 0) %></span></h4>
+          <h4>Has Played In: <span class="stat"><%= pluralize(@leader.total_games_count, 'game') %></span></h4>
+          <h4>Score: <span class="stat"><%= @leader.global_score %></span></h4>
+          <h4>Nemesis: <span class="stat">Your Mom</h4>
+          <hr>
+        </div>
+        <div class="link">
+          <p><%= link_to "View the losers", participants_path, class: "nav-link" %></p>
+        </div>
+      </div>
+
+    </div>
+    <div class="col-lg-4 col-md-12 landing-component">
+
+      <div class="biggest-game text-center">
+        <h3 class="column-title">BIGGEST GAME</h3>
+        <span class="fa-stack fa-lg fa-xl">
+          <i class="fa fa-circle fa-stack-2x"></i>
+          <i class="fa fa-dollar fa-stack-1x fa-inverse"></i>
+        </span>
+        <h2><span class="stat"><%= @big_game.formatted_date %></span></h2>
+        <div class="stats">
+          <h4>Pot Size: <span class="stat"><%= number_to_currency(@big_game.pot_size) %></span></h4>
+          <h4>Number of Players: <span class="stat"><%= @big_game.player_count %></span></h4>
+          <h4>Winner: <span class="stat"><%= @big_game.winner %></span></h4>
+          <h4>Second: <span class="stat"><%= @big_game.second_place %></span></h4>
+          <hr>
+        </div>
+        <div class="link">
+          <p><%= link_to "View the other games", participants_path, class: "nav-link" %></p>
+        </div>
+      </div>
+
+
+    </div>
+    <div class="col-lg-4 col-md-12 landing-component">
+
+      <div class="current-season text-center">
+        <h3 class="column-title">CURRENT SEASON</h3>
+        <span class="fa-stack fa-lg fa-xl">
+          <i class="fa fa-circle fa-stack-2x"></i>
+          <i class="fa fa-calendar fa-stack-1x fa-inverse"></i>
+        </span>
+        <h2><span class="stat"><%= @big_game.formatted_date %></span></h2>
+        <div class="stats">
+          <h4>Pot Size: <span class="stat"><%= number_to_currency(@big_game.pot_size) %></span></h4>
+          <h4>Number of Players: <span class="stat"><%= @big_game.player_count %></span></h4>
+          <h4>Winner: <span class="stat"><%= @big_game.winner %></span></h4>
+          <h4>Second: <span class="stat"><%= @big_game.second_place %></span></h4>
+          <hr>
+        </div>
+        <div class="link">
+          <p><%= link_to "View the other games", participants_path, class: "nav-link" %></p>
+        </div>
+      </div>
+
+    </div>
+    <%# render partial: "shared/participants_landing_column", locals: { participants: @participants } %>
+    <%# render partial: "shared/games_landing_column", locals: { games: @games } %>
+    <%# render partial: "shared/seasons_landing_column", locals: { seasons: @seasons } %>
   </div>
 </div>

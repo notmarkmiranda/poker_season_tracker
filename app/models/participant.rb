@@ -73,6 +73,10 @@ class Participant < ApplicationRecord
     players.where(finishing_place: 1).count
   end
 
+  def global_won_or_placed_percentage
+    global_game_top_three_count / total_games_count.to_f * 100
+  end
+
   def game_top_three_count
     players.where(finishing_place: [1,2,3]).where(game_id: evaluated_games.pluck(:id)).count
   end
@@ -118,6 +122,14 @@ class Participant < ApplicationRecord
 
   def previous_evaluated_games
     games.where.not(season_id: Season.current).sort_by { |game| game.date }.reverse
+  end
+
+  def self.sorted_by_name_for_select
+    all.sort_by { |p| p.full_name }.collect { |p| [p.full_name, p.id] }.unshift(["person"])
+  end
+
+  def self.leader
+    all.max_by { |part| part.evaluated_score }
   end
 
   private

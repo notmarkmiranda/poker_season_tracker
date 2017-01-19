@@ -28,12 +28,12 @@ class Game < ApplicationRecord
 
   def winner
     winner = Participant.joins(:players).where('players.game_id = ?', id).where('players.finishing_place = ?', 1).first
-    "#{winner.display_name}"
+    "#{winner.display_name}" if winner
   end
 
   def second_place
     second = Participant.joins(:players).where('players.game_id = ?', id).where('players.finishing_place = ?', 2).first
-    "#{second.display_name}"
+    "#{second.display_name}" if second
   end
 
   def find_player(id)
@@ -41,14 +41,24 @@ class Game < ApplicationRecord
   end
 
   def pot_size
-    player_count * buy_in + total_additional_expense
+    pot = player_count * buy_in
+    pot + total_additional_expense if total_additional_expense
+  end
+
+  def self.biggest
+    all.max_by { |game| game.pot_size }
   end
 
   def total_additional_expense
     players.pluck(:additional_expense).reduce(:+)
   end
 
-  def number_of_players
+  def sorted_players
+    players.sort_by { |pl| pl.finishing_place }
+  end
 
+  def sorted_players_for_partial
+    p = sorted_players
+    p.map { |pl| [pl.full_name, pl.finishing_place] }
   end
 end

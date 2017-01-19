@@ -1,63 +1,82 @@
-
 <div class="container">
   <div class="row">
     <div class="col-md-6 offset-md-3">
       <div class="list-group">
         <div class="list-group-item list-group-item-action seasons">
           <h5 class="list-group-item-heading">Game #<%= @game.id %></h5>
-          <p class="list-group-item-text"><%= @game.full_formatted_date %></p>
+          <p class="list-group-item-text"><%= @game.full_formatted_date %> | Buy In: <%= number_to_currency(@game.buy_in) %></p>
         </div>
-
-        <div class="list-group-item">
-          <h6>Current Players</h6>
-          <div id="playersOnly">
+        <div class="list-group-item list-group-item-action clearfix">
+          <h6>Add an Eliminated Player</h6>
+          <div class="col-md-6">
+            <%= select_tag 'participant_id', options_for_select(Participant.sorted_by_name_for_select), class: 'form-control' %>
+          </div>
+          <div class="col-md-3">
+            <%= select_tag 'finishing_place', options_for_select([*1..20].unshift(["place"])), class: 'form-control' %>
+          </div>
+          <div class="col-md-2">
+            <button id="eliminate-player" class="btn btn-primary">Eliminate!</button>
           </div>
         </div>
 
-        <div class="list-group-item ">
-          <input type="text" name="name" value="" id="newPlayer" data-provide="typeahead" class="typeahead" placeholder="Player Name">
-          <input type="button" name="name" value="add" id="newPlayerButton">
-        </div>
-
-        <!--
-          <div class="list-group-item list-group-item-action">
-           <select name="player_count" id="player_count" class="form-control">
-            <option value="">Make a Choice</option>
-            <% [*5..20].each do |i| %>
-              <option value="<%= i %>"><%= i %></option>
-            <% end %>
-          </select>
-        </div>
-      -->
         <div class="list-group-item" >
           <h6>Eliminated Players</h6>
-            <div id="eliminatedPlayers">
-            </div>
+            <%= render partial: "placed" %>
         </div>
       </div>
+
       <input type="button" name="name" value="submit" class="btn btn-primary gameSubmit" id="gameSubmit">
 
     </div>
   </div>
 </div>
 
-<!-- Modal -->
-<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-  <div class="modal-dialog" role="document">
-    <div class="modal-content">
-      <div class="modal-header">
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-          <span aria-hidden="true">&times;</span>
-        </button>
-        <h4 class="modal-title" id="myModalLabel">Modal title</h4>
-      </div>
-      <div class="modal-body">
-        O man, <span id="modalPlayerName">{player name}</span> sucks, but are you sure they got eliminated?
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-dismiss="modal">nope, fat finger</button>
-        <button type="button" class="btn btn-primary" id="playerElimSubmit">yea, they are gone</button>
-      </div>
-    </div>
-  </div>
-</div>
+
+<script>
+$(document).ready(function() {
+  $('#eliminate-player').on('click', function(e) {
+    e.preventDefault
+    var finishing_place = $('#finishing_place :selected').val();
+    var participant_id = $('#participant_id :selected').val();
+    var player_data = {player: { finishing_place: finishing_place, participant_id: participant_id, game_id: <%= @game.id %> }}
+    $.ajax({
+      url: '/api/v1/players',
+      type: 'post',
+      dataType: 'json',
+      data: player_data,
+      success: function(data) {
+
+        sort_response({game_id: data.game_id})
+      }
+    });
+  })
+})
+
+function sort_response(data) {
+  if (data.game_id) {
+    var players = getGamePlayers(data.game_id)
+  } else {
+    // $('#eliminatedPlayers').append("nope")
+  }
+}
+
+function getGamePlayers(id) {
+  $.ajax({
+    url: '/api/v1/games/' + id,
+    type: 'get',
+    dataType: 'json',
+    success: function(data) {
+      $('#eliminatedPlayers').replaceWith(formatPlayers(data.players))
+    }
+  })
+}
+
+function formatPlayers(players) {
+  var formatted = "<div id='eliminatedPlayers'>"
+  for (var i = 0; i < players.length; i ++) {
+    formatted += '<div>' + players[i].name + ' - ' + players[i].finishing_place + '</div>'
+  }
+  formatted += "</div>"
+  return formatted
+}
+</script>

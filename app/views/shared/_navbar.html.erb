@@ -1,31 +1,77 @@
-<nav class="navbar navbar-fixed-top navbar-light bg-faded">
+
+
+<nav class="navbar navbar-default">
   <div class="container">
-    <a class="navbar-brand" href="/"><span>POKER</span>RANK</a>
-    <ul class="nav navbar-nav pull-xs-right">
-      <% if current_user %>
+    <!-- Brand and toggle get grouped for better mobile display -->
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+        <span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a class="navbar-brand" href="/"><span>POKER</span>RANK</a>
+    </div>
+
+    <!-- Collect the nav links, forms, and other content for toggling -->
+    <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+      <ul class="nav navbar-nav">
+
+        <li class="dropdown">
+          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Players <span class="caret"></span></a>
+          <ul class="dropdown-menu">
+            <li><%= link_to "View All Players", participants_path, class: "nav-link" %></li>
+            <li role="separator" class="divider"></li>
+            <li><a href="#" class="nav-link">First Separated link</a></li>
+            <li><a href="#" class="nav-link">Second Separated link</a></li>
+            <li role="separator" class="divider"></li>
+            <li><a href="#" class="nav-link">Third Separated link</a></li>
+            <li><a href="#" class="nav-link">Fourth Separated link</a></li>
+          </ul>
+        </li>
+
+        <li class="dropdown">
+          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Games <span class="caret"></span></a>
+          <ul class="dropdown-menu">
+            <li><%= link_to "View All Games", games_path, class: "nav-link" %></li>
+            <li role="separator" class="divider"></li>
+            <li><a href="#" class="nav-link">First Separated link</a></li>
+            <li><a href="#" class="nav-link">Second Separated link</a></li>
+            <li role="separator" class="divider"></li>
+            <li><a href="#" class="nav-link">Third Separated link</a></li>
+            <li><a href="#" class="nav-link">Fourth Separated link</a></li>
+          </ul>
+        </li>
+
+        <li class="dropdown">
+          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Seasons <span class="caret"></span></a>
+          <ul class="dropdown-menu">
+            <li><%= link_to "View All Seasons", seasons_path, class: "nav-link" %></li>
+            <li role="separator" class="divider"></li>
+            <li><a href="#" class="nav-link">First Separated link</a></li>
+            <li><a href="#" class="nav-link">Second Separated link</a></li>
+            <li role="separator" class="divider"></li>
+            <li><a href="#" class="nav-link">Third Separated link</a></li>
+            <li><a href="#" class="nav-link">Fourth Separated link</a></li>
+          </ul>
+        </li>
+
+      </ul>
+
+      <ul class="nav navbar-nav navbar-right">
+        <% if current_user %>
         <li class="nav-item">
           <%= link_to "Create New Game", new_game_path, class:"nav-link" %>
         </li>
-      <% else %>
         <li class="nav-item">
-          <%= link_to "Log In", login_path, class:"nav-link" %>
+          <%= link_to "Log Out", logout_path, class:"nav-link" %>
         </li>
-      <% end %>
-      <li class="nav-item">
-        <%= link_to "Players", participants_path, class:"nav-link" %>
-      </li>
-      <li class="nav-item">
-        <%= link_to "Games", games_path, class:"nav-link" %>
-      </li>
-      <li class="nav-item">
-        <%= link_to "Seasons", seasons_path, class:"nav-link" %>
-      </li>
-      <% if current_user %>
-      <li class="nav-item">
-        <%= link_to "Log Out", logout_path, class:"nav-link" %>
-      </li>
-      <% end %>
-    </li>
-  </ul>
-</div>
+        <% else %>
+          <li class="nav-item">
+            <%= link_to "Log In", login_path, class:"nav-link" %>
+          </li>
+        <% end %>
+      </ul>
+    </div><!-- /.navbar-collapse -->
+  </div><!-- /.container-fluid -->
 </nav>

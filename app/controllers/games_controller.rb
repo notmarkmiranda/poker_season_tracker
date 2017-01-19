@@ -1,5 +1,5 @@
 class GamesController < ApplicationController
-  
+
   def index
     @games = Game.all.sort_by { |g| g.date }.reverse
   end
