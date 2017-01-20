@@ -12,7 +12,7 @@ RSpec.describe "Season API Endpoint
       "end" => "Current Season",
       "game_count" => 1,
       "cumulative_pot" => 150,
-      "season_leader" => "Andy B. | 1.15 points"
+      "season_leader" => "Andy B."
     }
   }
 
@@ -22,7 +22,7 @@ RSpec.describe "Season API Endpoint
       "end" => "Ended: Oct 18, 2016",
       "game_count" => 12,
       "cumulative_pot" => 1230,
-      "season_leader" => "Michael C. | 4.67 points"
+      "season_leader" => "Michael C."
     }
   }
 

@@ -1,5 +1,5 @@
 <div class="container">
-  <div class="row landing-row">
+  <div class="row">
     <div class="col-lg-4 col-md-12 landing-component">
 
       <div class="best-player text-center">
@@ -17,7 +17,7 @@
           <hr>
         </div>
         <div class="link">
-          <p><%= link_to "View the losers", participants_path, class: "nav-link" %></p>
+          <p><%= link_to "Here are the losers", participants_path, class: "nav-link" %></p>
         </div>
       </div>
 
@@ -39,7 +39,7 @@
           <hr>
         </div>
         <div class="link">
-          <p><%= link_to "View the other games", participants_path, class: "nav-link" %></p>
+          <p><%= link_to "check out the other games", participants_path, class: "nav-link" %></p>
         </div>
       </div>
 
@@ -53,16 +53,16 @@
           <i class="fa fa-circle fa-stack-2x"></i>
           <i class="fa fa-calendar fa-stack-1x fa-inverse"></i>
         </span>
-        <h2><span class="stat"><%= @big_game.formatted_date %></span></h2>
+        <h2><span class="stat"><%= pluralize(@current_season.game_count, 'game') %></span></h2>
         <div class="stats">
-          <h4>Pot Size: <span class="stat"><%= number_to_currency(@big_game.pot_size) %></span></h4>
-          <h4>Number of Players: <span class="stat"><%= @big_game.player_count %></span></h4>
-          <h4>Winner: <span class="stat"><%= @big_game.winner %></span></h4>
-          <h4>Second: <span class="stat"><%= @big_game.second_place %></span></h4>
+          <h4>Players Per Game: <span class="stat"><%= @current_season.ppg %></span></h4>
+          <h4>Average Pot Size <span class="stat"><%= number_to_currency(@current_season.average_pot_size) %></span></h4>
+          <h4>Total Pot Size: <span class="stat"><%= number_to_currency(@current_season.cumulative_pot_size) %></span></h4>
+          <h4>Season Leader: <span class="stat"><%= @current_season.winner %></span></h4>
           <hr>
         </div>
         <div class="link">
-          <p><%= link_to "View the other games", participants_path, class: "nav-link" %></p>
+          <p><%= link_to "all of the seasons", seasons_path, class: "nav-link" %></p>
         </div>
       </div>
 

@@ -125,7 +125,7 @@ class Participant < ApplicationRecord
   end
 
   def self.sorted_by_name_for_select
-    all.sort_by { |p| p.full_name }.collect { |p| [p.full_name, p.id] }.unshift(["person"])
+    all.sort_by { |p| p.full_name }.collect { |p| [p.full_name, p.id] }.unshift(["person"], ["Create New Player"])
   end
 
   def self.leader

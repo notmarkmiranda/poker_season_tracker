@@ -77,7 +77,7 @@ RSpec.describe "Overall Rankings API Endpoint", type: :request do
   context "yup" do
 
     before do
-      post '/api/v1/participants', params: { participant: { first_name: 'John', last_name: 'Doe' } }
+      post '/api/v1/participants', params: { participant: { first_name: 'john', last_name: 'Doe' } }
     end
 
     it "POST#create" do

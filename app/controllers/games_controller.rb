@@ -35,13 +35,14 @@ class GamesController < ApplicationController
   end
 
   def update
+    # binding.pry
     @game = Game.find(params[:id])
-    if @game.update(game_params)
+    # if @game.update(game_params)
       @game.calculate_scores
       redirect_to @game
-    else
-      render :edit
-    end
+    # else
+      # render :edit
+    # end
   end
 
   def destroy
