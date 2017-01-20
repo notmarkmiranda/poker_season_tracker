@@ -11,8 +11,8 @@ Rails.application.routes.draw do
     namespace :v1 do
       resources :participants, only: [:index, :show, :create, :update, :destroy]
       resources :ordered_games, only: [:index]
-      resources :players, only: [:index, :show]
-      resources :games, only: [:index, :update]
+      resources :players, only: [:index, :show, :create]
+      resources :games, only: [:index, :show, :update]
       resources :seasons, only: [:index]
     end
   end

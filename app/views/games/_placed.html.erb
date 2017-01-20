@@ -1,0 +1,12 @@
+<div id="eliminatedPlayers">
+  <ul class="list-group">
+  <% @game.sorted_players_for_partial.each do |player_name, place| %>
+    <li class="list-group-item justify-content-between">
+      <span class="badge">
+        <%= place %>
+      </span>
+      <%= player_name %>
+    </li>
+  <% end %>
+  </ul>
+</div>

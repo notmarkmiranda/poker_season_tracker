@@ -11,6 +11,9 @@ class Player < ApplicationRecord
   #   score = score_math
   #   (score * 100).floor / 100.0
   # end
+  def full_name
+    participant.full_name
+  end
 
   def get_score
     score = score_math

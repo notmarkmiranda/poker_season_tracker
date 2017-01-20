@@ -5,14 +5,18 @@ class Api::V1::GamesController < Api::ApiController
     @games = Game.all.sort_by { |g| g.date }.reverse
   end
 
+  def show
+    @game = Game.find(params[:id])
+  end
+
   def update
-    @game    = Game.find(params[:id])
-    @game.completed = true
-    # @game.calculate_scores
+    @game = Game.find(params[:id])
+    # @game.completed = true
+    @game.calculate_scores
     @game.save
 
-    players = params[:_json]
-    PlayerCreator.new(players, @game)
+    # players = params[:_json]
+    # PlayerCreator.new(players, @game)
     render json: @game.to_json
   end
 end

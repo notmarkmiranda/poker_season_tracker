@@ -1,108 +1,52 @@
+html, body {
+  font-family: 'Roboto', sans-serif !important;
+}
+
 a.navbar-brand > span {
   font-weight: bold;
   color: #C89C00;
 }
 
-li.nav-item > a.nav-link {
+a.nav-link, a.dropdown-toggle {
   text-transform: uppercase;
-  font-size: 0.7em;
-  padding-top: 10px;
-  padding-left: 20px;
+  letter-spacing: 0.1em;
+  font-size: .8em;
 }
 
-.main-container {
-  margin-top: 70px;
-  margin-bottom: 70px;
+.fa-xl {
+  font-size: 8em;
 }
 
-@media (max-width: 414px) {
-  .main-container {
-    margin-top: 150px;
-    margin-bottom: 150px;
-  }
-
-  div.list-group {
-    padding-bottom: 25px;
-  }
-}
-
-.muted-text {
-  font-size: 0.7em;
-  text-transform: uppercase;
-}
-
-div.list-group-item.list-group-item-action.players {
-  background-color: #86BBD8;
-  & > h5.list-group-item-heading {
-    color: #fff;
-  }
-}
-
-div.list-group-item.list-group-item-action.games {
-  background-color: #33658A;
-  & > h5.list-group-item-heading {
-    color: #fff;
-  }
-}
-
-div.list-group-item.list-group-item-action.seasons {
-  background-color: #88A0A8;
-  & > h5.list-group-item-heading {
-    color: #fff;
-  }
-}
-
-div.list-group-item.list-group-item-action.yellow {
-  background-color: #C89C00;
-  & > h5.list-group-item-heading {
-    color: #fff;
-  }
-}
-
-table {
-  font-size: 0.9em;
-}
-
-thead > tr > th, tbody > tr > td {
-  text-align: center;
-}
-
-.table-row, .div-row {
-  cursor: pointer;
-}
-
-p.list-group-item-text > span {
-  color: red;
-}
-
-div.participant-main {
-  padding-bottom: 20px;
-}
-
-div.list-group-item.list-group-item-action.stat-line {
-  background-color: #e7e7e7;
-}
-
-.player{
-  display: -webkit-flex;
-    display: flex;
-  justify-content: space-between;
-  flex-direction: row;
-  flex-wrap: nowrap;
-  align-items:center;
-  border-bottom: 1px solid #e8e5e5;
-  margin-bottom: 10px;
-  padding: 5px;
-  font-size: .8rem;
-  &:last-child {
-    border-bottom:none;
+.landing-component {
+  > div > h3.column-title {
     margin-bottom: 0px;
+    font-weight: 300;
+  }
+  > .best-player > span > i.fa-circle {
+    color: #C5C5C5;
+  }
+  > .biggest-game > span > i.fa-circle {
+    color: #4c5b61;
+  }
+  > .current-season > span > i.fa-circle {
+    color: #829191;
   }
 }
-.playerElim{
-  margin-left:10px;
+
+span.stat {
+  font-weight: bold;
+  text-transform: uppercase;
+  color: #5d5d5d;
 }
-.gameSubmit{
-  margin-top:10px;
-  float:right;
+
+@media screen and (max-width: 1024px) {
+  .fa-xl {
+    font-size: 6em;
+  }
+  
+  .landing-component {
+    padding-top: 20px;
+    padding-bottom: 20px;
+    border-bottom: 1px solid #5d5d5d;
+  }
 }

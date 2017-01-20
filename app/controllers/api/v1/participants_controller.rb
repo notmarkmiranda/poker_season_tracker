@@ -11,8 +11,10 @@ class Api::V1::ParticipantsController < Api::ApiController
   end
 
   def create
-    participant = Participant.new(participant_params)
-    render partial: '/api/v1/participants/participant', locals: { participant: participant } if participant.save
+    params[:participant][:first_name].capitalize!
+    params[:participant][:last_name].capitalize!
+    participant = Participant.find_or_create_by(participant_params)
+    render partial: '/api/v1/participants/participant', locals: { participant: participant } if participant
   end
 
   def update

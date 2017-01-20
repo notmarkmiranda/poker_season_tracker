@@ -60,6 +60,15 @@ class Season < ApplicationRecord
     end.reduce(:+)
   end
 
+  def ppg
+    count_array = games.map { |g| g.player_count }
+    (count_array.reduce(:+) / count_array.count.to_f * 10).floor / 10.0
+  end
+
+  def average_pot_size
+    (cumulative_pot_size / game_count.to_f * 100).floor / 100.0
+  end
+
   private
 
   def format_standings(ordered)
@@ -80,7 +89,7 @@ class Season < ApplicationRecord
   def format_winner(top)
     win = top.max_by{ |k,v| v }
     winner = Participant.find(win[0])
-    "#{winner.display_name} | #{win[1]} points"
+    winner.display_name
   end
 
   def check_for_player(standings, player)
