@@ -1,5 +1,6 @@
 class GamesController < ApplicationController
-
+  before_action :require_user, except: [:index, :show]
+  
   def index
     @games = Game.all.sort_by { |g| g.date }.reverse
   end

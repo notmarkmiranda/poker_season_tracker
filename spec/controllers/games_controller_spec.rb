@@ -1,6 +1,10 @@
 require 'rails_helper'
 
 RSpec.describe GamesController, type: :controller do
+  before do
+    user = User.create(email: "a@b.com", password: "password")
+    allow_any_instance_of(ApplicationController).to receive(:current_user).and_return(user)
+  end
   describe "GET index" do
     it "assigns @games" do
       game = create(:game)
